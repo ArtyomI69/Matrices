@@ -97,12 +97,19 @@ namespace ClassLibraryMatrices {
         }
 
         public static Matrix operator ^(Matrix a, int b) {
-            if (b < 0) a.Inverse();
-            int n = Math.Abs(b);
-            for(int i = 1; i < n; i++) {
-                a = a * a;
+            Matrix c;
+            if (b == 0) {
+                c = new Matrix(a.M, true);
+                return c;
             }
-            return a;
+
+            c = (Matrix)a.Clone();
+            if (b < 0) c.Inverse();
+            int n = Math.Abs(b);
+            for (int i = 1; i < n; i++) {
+                c = c * c;
+            }
+            return c;
         }
 
         public bool IsSquare() {
@@ -136,8 +143,8 @@ namespace ClassLibraryMatrices {
 
         public override string ToString() {
             string s = "";
-            for (int i = 0; i < N; i++) {
-                for (int j = 0; j < M; j++) {
+            for (int j = 0; j < M; j++) {
+                for (int i = 0; i < N; i++) {
                     s += ($"{_data[i, j]:0.00}  ");
                 }
                 s += ("\n");

@@ -8,10 +8,9 @@ namespace ConsoleMatrices {
             //Console.Write(a.ToString());
             //Console.WriteLine();
             Matrix a = new Matrix(4, 4, new Random());
-            Matrix b = new Matrix(4, 4, new Random());
             Console.WriteLine(a);
-            Console.WriteLine(b);
-            Console.WriteLine(a-b);
+            Console.WriteLine(a ^ -2);
+            Console.WriteLine(a);
         }
     }
 }
