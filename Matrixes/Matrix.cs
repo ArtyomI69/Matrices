@@ -128,6 +128,7 @@ namespace ClassLibraryMatrices {
         }
 
         public double Determinant() {
+            if (!IsSquare()) throw new Exception("Матрица должна быть квадратной для нахождения определителя");
             return CalculateDeterminant(_data);
         }
 

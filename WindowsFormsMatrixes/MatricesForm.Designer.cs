@@ -25,8 +25,10 @@
         private void InitializeComponent() {
             this.PanelInput = new System.Windows.Forms.Panel();
             this.PanelB = new System.Windows.Forms.Panel();
-            this.RaiseToPowerBTextBox = new System.Windows.Forms.TextBox();
-            this.MultiplierBTextBox = new System.Windows.Forms.TextBox();
+            this.NRowBNumeric = new System.Windows.Forms.NumericUpDown();
+            this.NColumnBNumeric = new System.Windows.Forms.NumericUpDown();
+            this.MultiplierBNumeric = new System.Windows.Forms.NumericUpDown();
+            this.ArgumentBNumeric = new System.Windows.Forms.NumericUpDown();
             this.ReverseBButton = new System.Windows.Forms.Button();
             this.RaistoToPowerBButton = new System.Windows.Forms.Button();
             this.DeterminantBButton = new System.Windows.Forms.Button();
@@ -35,9 +37,7 @@
             this.ClearBButton = new System.Windows.Forms.Button();
             this.GenerateBButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.NRowBTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.NColumnBTextBox = new System.Windows.Forms.TextBox();
             this.BRichTextBox = new System.Windows.Forms.RichTextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.PanelActions = new System.Windows.Forms.Panel();
@@ -45,8 +45,10 @@
             this.SubtractionButton = new System.Windows.Forms.Button();
             this.SumButton = new System.Windows.Forms.Button();
             this.PanelA = new System.Windows.Forms.Panel();
-            this.RaiseToPowerATextBox = new System.Windows.Forms.TextBox();
-            this.MultiplierATextBox = new System.Windows.Forms.TextBox();
+            this.NRowANumeric = new System.Windows.Forms.NumericUpDown();
+            this.NColumnANumeric = new System.Windows.Forms.NumericUpDown();
+            this.MultiplierANumeric = new System.Windows.Forms.NumericUpDown();
+            this.ArgumentANumeric = new System.Windows.Forms.NumericUpDown();
             this.ReverseAButton = new System.Windows.Forms.Button();
             this.RaistoToPowerAButton = new System.Windows.Forms.Button();
             this.DeterminantAButton = new System.Windows.Forms.Button();
@@ -55,19 +57,25 @@
             this.ClearAButton = new System.Windows.Forms.Button();
             this.GenerateAButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.NRowATextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.NColumnATextBox = new System.Windows.Forms.TextBox();
             this.ARichTextBox = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.PanelOutput = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.CRichTextBox = new System.Windows.Forms.RichTextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.PanelInput.SuspendLayout();
             this.PanelB.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NRowBNumeric)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NColumnBNumeric)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MultiplierBNumeric)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ArgumentBNumeric)).BeginInit();
             this.PanelActions.SuspendLayout();
             this.PanelA.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NRowANumeric)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NColumnANumeric)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MultiplierANumeric)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ArgumentANumeric)).BeginInit();
             this.PanelOutput.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,13 +87,15 @@
             this.PanelInput.Dock = System.Windows.Forms.DockStyle.Left;
             this.PanelInput.Location = new System.Drawing.Point(0, 0);
             this.PanelInput.Name = "PanelInput";
-            this.PanelInput.Size = new System.Drawing.Size(810, 603);
+            this.PanelInput.Size = new System.Drawing.Size(908, 653);
             this.PanelInput.TabIndex = 0;
             // 
             // PanelB
             // 
-            this.PanelB.Controls.Add(this.RaiseToPowerBTextBox);
-            this.PanelB.Controls.Add(this.MultiplierBTextBox);
+            this.PanelB.Controls.Add(this.NRowBNumeric);
+            this.PanelB.Controls.Add(this.NColumnBNumeric);
+            this.PanelB.Controls.Add(this.MultiplierBNumeric);
+            this.PanelB.Controls.Add(this.ArgumentBNumeric);
             this.PanelB.Controls.Add(this.ReverseBButton);
             this.PanelB.Controls.Add(this.RaistoToPowerBButton);
             this.PanelB.Controls.Add(this.DeterminantBButton);
@@ -94,30 +104,77 @@
             this.PanelB.Controls.Add(this.ClearBButton);
             this.PanelB.Controls.Add(this.GenerateBButton);
             this.PanelB.Controls.Add(this.label4);
-            this.PanelB.Controls.Add(this.NRowBTextBox);
             this.PanelB.Controls.Add(this.label5);
-            this.PanelB.Controls.Add(this.NColumnBTextBox);
             this.PanelB.Controls.Add(this.BRichTextBox);
             this.PanelB.Controls.Add(this.label6);
             this.PanelB.Dock = System.Windows.Forms.DockStyle.Right;
-            this.PanelB.Location = new System.Drawing.Point(467, 0);
+            this.PanelB.Location = new System.Drawing.Point(534, 0);
             this.PanelB.Name = "PanelB";
-            this.PanelB.Size = new System.Drawing.Size(343, 603);
+            this.PanelB.Size = new System.Drawing.Size(374, 653);
             this.PanelB.TabIndex = 3;
             // 
-            // RaiseToPowerBTextBox
+            // NRowBNumeric
             // 
-            this.RaiseToPowerBTextBox.Location = new System.Drawing.Point(281, 359);
-            this.RaiseToPowerBTextBox.Name = "RaiseToPowerBTextBox";
-            this.RaiseToPowerBTextBox.Size = new System.Drawing.Size(45, 22);
-            this.RaiseToPowerBTextBox.TabIndex = 16;
+            this.NRowBNumeric.Location = new System.Drawing.Point(210, 215);
+            this.NRowBNumeric.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NRowBNumeric.Name = "NRowBNumeric";
+            this.NRowBNumeric.Size = new System.Drawing.Size(120, 22);
+            this.NRowBNumeric.TabIndex = 22;
+            this.NRowBNumeric.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
-            // MultiplierBTextBox
+            // NColumnBNumeric
             // 
-            this.MultiplierBTextBox.Location = new System.Drawing.Point(281, 307);
-            this.MultiplierBTextBox.Name = "MultiplierBTextBox";
-            this.MultiplierBTextBox.Size = new System.Drawing.Size(45, 22);
-            this.MultiplierBTextBox.TabIndex = 15;
+            this.NColumnBNumeric.Location = new System.Drawing.Point(35, 215);
+            this.NColumnBNumeric.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NColumnBNumeric.Name = "NColumnBNumeric";
+            this.NColumnBNumeric.Size = new System.Drawing.Size(120, 22);
+            this.NColumnBNumeric.TabIndex = 21;
+            this.NColumnBNumeric.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // MultiplierBNumeric
+            // 
+            this.MultiplierBNumeric.Location = new System.Drawing.Point(280, 308);
+            this.MultiplierBNumeric.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.MultiplierBNumeric.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
+            this.MultiplierBNumeric.Name = "MultiplierBNumeric";
+            this.MultiplierBNumeric.Size = new System.Drawing.Size(80, 22);
+            this.MultiplierBNumeric.TabIndex = 20;
+            // 
+            // ArgumentBNumeric
+            // 
+            this.ArgumentBNumeric.Location = new System.Drawing.Point(280, 360);
+            this.ArgumentBNumeric.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.ArgumentBNumeric.Name = "ArgumentBNumeric";
+            this.ArgumentBNumeric.Size = new System.Drawing.Size(80, 22);
+            this.ArgumentBNumeric.TabIndex = 19;
             // 
             // ReverseBButton
             // 
@@ -127,6 +184,7 @@
             this.ReverseBButton.TabIndex = 14;
             this.ReverseBButton.Text = "Обратная матрица";
             this.ReverseBButton.UseVisualStyleBackColor = true;
+            this.ReverseBButton.Click += new System.EventHandler(this.ReverseBButton_Click);
             // 
             // RaistoToPowerBButton
             // 
@@ -136,6 +194,7 @@
             this.RaistoToPowerBButton.TabIndex = 13;
             this.RaistoToPowerBButton.Text = "Возвести в ";
             this.RaistoToPowerBButton.UseVisualStyleBackColor = true;
+            this.RaistoToPowerBButton.Click += new System.EventHandler(this.RaistoToPowerBButton_Click);
             // 
             // DeterminantBButton
             // 
@@ -145,6 +204,7 @@
             this.DeterminantBButton.TabIndex = 11;
             this.DeterminantBButton.Text = "Определитель";
             this.DeterminantBButton.UseVisualStyleBackColor = true;
+            this.DeterminantBButton.Click += new System.EventHandler(this.DeterminantBButton_Click);
             // 
             // TransponseBButton
             // 
@@ -154,6 +214,7 @@
             this.TransponseBButton.TabIndex = 10;
             this.TransponseBButton.Text = "Транспонировать";
             this.TransponseBButton.UseVisualStyleBackColor = true;
+            this.TransponseBButton.Click += new System.EventHandler(this.TransponseBButton_Click);
             // 
             // MultiplyBButton
             // 
@@ -163,6 +224,7 @@
             this.MultiplyBButton.TabIndex = 9;
             this.MultiplyBButton.Text = "Умножить на";
             this.MultiplyBButton.UseVisualStyleBackColor = true;
+            this.MultiplyBButton.Click += new System.EventHandler(this.MultiplyBButton_Click);
             // 
             // ClearBButton
             // 
@@ -172,6 +234,7 @@
             this.ClearBButton.TabIndex = 8;
             this.ClearBButton.Text = "Очистить";
             this.ClearBButton.UseVisualStyleBackColor = true;
+            this.ClearBButton.Click += new System.EventHandler(this.ClearBButton_Click);
             // 
             // GenerateBButton
             // 
@@ -181,6 +244,7 @@
             this.GenerateBButton.TabIndex = 7;
             this.GenerateBButton.Text = "Сгенерировать";
             this.GenerateBButton.UseVisualStyleBackColor = true;
+            this.GenerateBButton.Click += new System.EventHandler(this.GenerateBButton_Click);
             // 
             // label4
             // 
@@ -191,13 +255,6 @@
             this.label4.TabIndex = 6;
             this.label4.Text = "M";
             // 
-            // NRowBTextBox
-            // 
-            this.NRowBTextBox.Location = new System.Drawing.Point(209, 214);
-            this.NRowBTextBox.Name = "NRowBTextBox";
-            this.NRowBTextBox.Size = new System.Drawing.Size(118, 22);
-            this.NRowBTextBox.TabIndex = 5;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -207,13 +264,6 @@
             this.label5.TabIndex = 4;
             this.label5.Text = "N";
             // 
-            // NColumnBTextBox
-            // 
-            this.NColumnBTextBox.Location = new System.Drawing.Point(35, 214);
-            this.NColumnBTextBox.Name = "NColumnBTextBox";
-            this.NColumnBTextBox.Size = new System.Drawing.Size(118, 22);
-            this.NColumnBTextBox.TabIndex = 3;
-            // 
             // BRichTextBox
             // 
             this.BRichTextBox.Location = new System.Drawing.Point(12, 70);
@@ -221,6 +271,7 @@
             this.BRichTextBox.Size = new System.Drawing.Size(315, 136);
             this.BRichTextBox.TabIndex = 2;
             this.BRichTextBox.Text = "";
+            this.BRichTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BRichTextBox_KeyPress);
             // 
             // label6
             // 
@@ -237,42 +288,47 @@
             this.PanelActions.Controls.Add(this.SubtractionButton);
             this.PanelActions.Controls.Add(this.SumButton);
             this.PanelActions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PanelActions.Location = new System.Drawing.Point(345, 0);
+            this.PanelActions.Location = new System.Drawing.Point(374, 0);
             this.PanelActions.Name = "PanelActions";
-            this.PanelActions.Size = new System.Drawing.Size(465, 603);
+            this.PanelActions.Size = new System.Drawing.Size(534, 653);
             this.PanelActions.TabIndex = 2;
             // 
             // MultiplyButton
             // 
-            this.MultiplyButton.Location = new System.Drawing.Point(22, 300);
+            this.MultiplyButton.Location = new System.Drawing.Point(47, 306);
             this.MultiplyButton.Name = "MultiplyButton";
             this.MultiplyButton.Size = new System.Drawing.Size(80, 40);
             this.MultiplyButton.TabIndex = 2;
             this.MultiplyButton.Text = "A × B";
             this.MultiplyButton.UseVisualStyleBackColor = true;
+            this.MultiplyButton.Click += new System.EventHandler(this.MultiplyButton_Click);
             // 
             // SubtractionButton
             // 
-            this.SubtractionButton.Location = new System.Drawing.Point(22, 254);
+            this.SubtractionButton.Location = new System.Drawing.Point(47, 260);
             this.SubtractionButton.Name = "SubtractionButton";
             this.SubtractionButton.Size = new System.Drawing.Size(80, 40);
             this.SubtractionButton.TabIndex = 1;
             this.SubtractionButton.Text = "A - B";
             this.SubtractionButton.UseVisualStyleBackColor = true;
+            this.SubtractionButton.Click += new System.EventHandler(this.SubtractionButton_Click);
             // 
             // SumButton
             // 
-            this.SumButton.Location = new System.Drawing.Point(22, 208);
+            this.SumButton.Location = new System.Drawing.Point(47, 214);
             this.SumButton.Name = "SumButton";
             this.SumButton.Size = new System.Drawing.Size(80, 40);
             this.SumButton.TabIndex = 0;
             this.SumButton.Text = "A + B";
             this.SumButton.UseVisualStyleBackColor = true;
+            this.SumButton.Click += new System.EventHandler(this.SumButton_Click);
             // 
             // PanelA
             // 
-            this.PanelA.Controls.Add(this.RaiseToPowerATextBox);
-            this.PanelA.Controls.Add(this.MultiplierATextBox);
+            this.PanelA.Controls.Add(this.NRowANumeric);
+            this.PanelA.Controls.Add(this.NColumnANumeric);
+            this.PanelA.Controls.Add(this.MultiplierANumeric);
+            this.PanelA.Controls.Add(this.ArgumentANumeric);
             this.PanelA.Controls.Add(this.ReverseAButton);
             this.PanelA.Controls.Add(this.RaistoToPowerAButton);
             this.PanelA.Controls.Add(this.DeterminantAButton);
@@ -281,30 +337,77 @@
             this.PanelA.Controls.Add(this.ClearAButton);
             this.PanelA.Controls.Add(this.GenerateAButton);
             this.PanelA.Controls.Add(this.label3);
-            this.PanelA.Controls.Add(this.NRowATextBox);
             this.PanelA.Controls.Add(this.label2);
-            this.PanelA.Controls.Add(this.NColumnATextBox);
             this.PanelA.Controls.Add(this.ARichTextBox);
             this.PanelA.Controls.Add(this.label1);
             this.PanelA.Dock = System.Windows.Forms.DockStyle.Left;
             this.PanelA.Location = new System.Drawing.Point(0, 0);
             this.PanelA.Name = "PanelA";
-            this.PanelA.Size = new System.Drawing.Size(345, 603);
+            this.PanelA.Size = new System.Drawing.Size(374, 653);
             this.PanelA.TabIndex = 0;
             // 
-            // RaiseToPowerATextBox
+            // NRowANumeric
             // 
-            this.RaiseToPowerATextBox.Location = new System.Drawing.Point(281, 359);
-            this.RaiseToPowerATextBox.Name = "RaiseToPowerATextBox";
-            this.RaiseToPowerATextBox.Size = new System.Drawing.Size(45, 22);
-            this.RaiseToPowerATextBox.TabIndex = 16;
+            this.NRowANumeric.Location = new System.Drawing.Point(206, 215);
+            this.NRowANumeric.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NRowANumeric.Name = "NRowANumeric";
+            this.NRowANumeric.Size = new System.Drawing.Size(120, 22);
+            this.NRowANumeric.TabIndex = 20;
+            this.NRowANumeric.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
-            // MultiplierATextBox
+            // NColumnANumeric
             // 
-            this.MultiplierATextBox.Location = new System.Drawing.Point(281, 307);
-            this.MultiplierATextBox.Name = "MultiplierATextBox";
-            this.MultiplierATextBox.Size = new System.Drawing.Size(45, 22);
-            this.MultiplierATextBox.TabIndex = 15;
+            this.NColumnANumeric.Location = new System.Drawing.Point(35, 215);
+            this.NColumnANumeric.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NColumnANumeric.Name = "NColumnANumeric";
+            this.NColumnANumeric.Size = new System.Drawing.Size(120, 22);
+            this.NColumnANumeric.TabIndex = 19;
+            this.NColumnANumeric.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // MultiplierANumeric
+            // 
+            this.MultiplierANumeric.Location = new System.Drawing.Point(282, 308);
+            this.MultiplierANumeric.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.MultiplierANumeric.Minimum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            -2147483648});
+            this.MultiplierANumeric.Name = "MultiplierANumeric";
+            this.MultiplierANumeric.Size = new System.Drawing.Size(80, 22);
+            this.MultiplierANumeric.TabIndex = 18;
+            // 
+            // ArgumentANumeric
+            // 
+            this.ArgumentANumeric.Location = new System.Drawing.Point(282, 360);
+            this.ArgumentANumeric.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.ArgumentANumeric.Name = "ArgumentANumeric";
+            this.ArgumentANumeric.Size = new System.Drawing.Size(80, 22);
+            this.ArgumentANumeric.TabIndex = 17;
             // 
             // ReverseAButton
             // 
@@ -314,6 +417,7 @@
             this.ReverseAButton.TabIndex = 14;
             this.ReverseAButton.Text = "Обратная матрица";
             this.ReverseAButton.UseVisualStyleBackColor = true;
+            this.ReverseAButton.Click += new System.EventHandler(this.ReverseAButton_Click);
             // 
             // RaistoToPowerAButton
             // 
@@ -323,6 +427,7 @@
             this.RaistoToPowerAButton.TabIndex = 13;
             this.RaistoToPowerAButton.Text = "Возвести в ";
             this.RaistoToPowerAButton.UseVisualStyleBackColor = true;
+            this.RaistoToPowerAButton.Click += new System.EventHandler(this.RaistoToPowerAButton_Click);
             // 
             // DeterminantAButton
             // 
@@ -332,6 +437,7 @@
             this.DeterminantAButton.TabIndex = 11;
             this.DeterminantAButton.Text = "Определитель";
             this.DeterminantAButton.UseVisualStyleBackColor = true;
+            this.DeterminantAButton.Click += new System.EventHandler(this.DeterminantAButton_Click);
             // 
             // TransponseAButton
             // 
@@ -341,6 +447,7 @@
             this.TransponseAButton.TabIndex = 10;
             this.TransponseAButton.Text = "Транспонировать";
             this.TransponseAButton.UseVisualStyleBackColor = true;
+            this.TransponseAButton.Click += new System.EventHandler(this.TransponseAButton_Click);
             // 
             // MultiplyAButton
             // 
@@ -350,6 +457,7 @@
             this.MultiplyAButton.TabIndex = 9;
             this.MultiplyAButton.Text = "Умножить на";
             this.MultiplyAButton.UseVisualStyleBackColor = true;
+            this.MultiplyAButton.Click += new System.EventHandler(this.MultiplyAButton_Click);
             // 
             // ClearAButton
             // 
@@ -359,6 +467,7 @@
             this.ClearAButton.TabIndex = 8;
             this.ClearAButton.Text = "Очистить";
             this.ClearAButton.UseVisualStyleBackColor = true;
+            this.ClearAButton.Click += new System.EventHandler(this.ClearAButton_Click);
             // 
             // GenerateAButton
             // 
@@ -368,6 +477,7 @@
             this.GenerateAButton.TabIndex = 7;
             this.GenerateAButton.Text = "Сгенерировать";
             this.GenerateAButton.UseVisualStyleBackColor = true;
+            this.GenerateAButton.Click += new System.EventHandler(this.GenerateAButton_Click);
             // 
             // label3
             // 
@@ -378,13 +488,6 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "M";
             // 
-            // NRowATextBox
-            // 
-            this.NRowATextBox.Location = new System.Drawing.Point(209, 214);
-            this.NRowATextBox.Name = "NRowATextBox";
-            this.NRowATextBox.Size = new System.Drawing.Size(118, 22);
-            this.NRowATextBox.TabIndex = 5;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -394,13 +497,6 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "N";
             // 
-            // NColumnATextBox
-            // 
-            this.NColumnATextBox.Location = new System.Drawing.Point(35, 214);
-            this.NColumnATextBox.Name = "NColumnATextBox";
-            this.NColumnATextBox.Size = new System.Drawing.Size(118, 22);
-            this.NColumnATextBox.TabIndex = 3;
-            // 
             // ARichTextBox
             // 
             this.ARichTextBox.Location = new System.Drawing.Point(12, 70);
@@ -408,6 +504,7 @@
             this.ARichTextBox.Size = new System.Drawing.Size(315, 136);
             this.ARichTextBox.TabIndex = 2;
             this.ARichTextBox.Text = "";
+            this.ARichTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ARichTextBox_KeyPress);
             // 
             // label1
             // 
@@ -421,12 +518,12 @@
             // PanelOutput
             // 
             this.PanelOutput.Controls.Add(this.label8);
-            this.PanelOutput.Controls.Add(this.richTextBox1);
+            this.PanelOutput.Controls.Add(this.CRichTextBox);
             this.PanelOutput.Controls.Add(this.label7);
             this.PanelOutput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PanelOutput.Location = new System.Drawing.Point(810, 0);
+            this.PanelOutput.Location = new System.Drawing.Point(908, 0);
             this.PanelOutput.Name = "PanelOutput";
-            this.PanelOutput.Size = new System.Drawing.Size(272, 603);
+            this.PanelOutput.Size = new System.Drawing.Size(274, 653);
             this.PanelOutput.TabIndex = 1;
             // 
             // label8
@@ -438,13 +535,14 @@
             this.label8.TabIndex = 17;
             this.label8.Text = "Ответ";
             // 
-            // richTextBox1
+            // CRichTextBox
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(46, 70);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(214, 502);
-            this.richTextBox1.TabIndex = 17;
-            this.richTextBox1.Text = "";
+            this.CRichTextBox.Location = new System.Drawing.Point(46, 70);
+            this.CRichTextBox.Name = "CRichTextBox";
+            this.CRichTextBox.Size = new System.Drawing.Size(214, 502);
+            this.CRichTextBox.TabIndex = 17;
+            this.CRichTextBox.Text = "";
+            this.CRichTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CRichTextBox_KeyPress);
             // 
             // label7
             // 
@@ -460,7 +558,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1082, 603);
+            this.ClientSize = new System.Drawing.Size(1182, 653);
             this.Controls.Add(this.PanelOutput);
             this.Controls.Add(this.PanelInput);
             this.Name = "MatricesForm";
@@ -468,9 +566,17 @@
             this.PanelInput.ResumeLayout(false);
             this.PanelB.ResumeLayout(false);
             this.PanelB.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NRowBNumeric)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NColumnBNumeric)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MultiplierBNumeric)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ArgumentBNumeric)).EndInit();
             this.PanelActions.ResumeLayout(false);
             this.PanelA.ResumeLayout(false);
             this.PanelA.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NRowANumeric)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NColumnANumeric)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MultiplierANumeric)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ArgumentANumeric)).EndInit();
             this.PanelOutput.ResumeLayout(false);
             this.PanelOutput.PerformLayout();
             this.ResumeLayout(false);
@@ -489,21 +595,14 @@
         private System.Windows.Forms.RichTextBox ARichTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox NColumnATextBox;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox NRowATextBox;
         private System.Windows.Forms.Button GenerateAButton;
         private System.Windows.Forms.Button ClearAButton;
         private System.Windows.Forms.Button ReverseAButton;
         private System.Windows.Forms.Button RaistoToPowerAButton;
         private System.Windows.Forms.Button DeterminantAButton;
         private System.Windows.Forms.Button TransponseAButton;
-        private System.Windows.Forms.Button MultiplyAButton;
-        private System.Windows.Forms.TextBox RaiseToPowerATextBox;
-        private System.Windows.Forms.TextBox MultiplierATextBox;
         private System.Windows.Forms.Panel PanelB;
-        private System.Windows.Forms.TextBox RaiseToPowerBTextBox;
-        private System.Windows.Forms.TextBox MultiplierBTextBox;
         private System.Windows.Forms.Button ReverseBButton;
         private System.Windows.Forms.Button RaistoToPowerBButton;
         private System.Windows.Forms.Button DeterminantBButton;
@@ -512,14 +611,21 @@
         private System.Windows.Forms.Button ClearBButton;
         private System.Windows.Forms.Button GenerateBButton;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox NRowBTextBox;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox NColumnBTextBox;
         private System.Windows.Forms.RichTextBox BRichTextBox;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox CRichTextBox;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button MultiplyAButton;
+        private System.Windows.Forms.NumericUpDown MultiplierBNumeric;
+        private System.Windows.Forms.NumericUpDown ArgumentBNumeric;
+        private System.Windows.Forms.NumericUpDown MultiplierANumeric;
+        private System.Windows.Forms.NumericUpDown ArgumentANumeric;
+        private System.Windows.Forms.NumericUpDown NColumnBNumeric;
+        private System.Windows.Forms.NumericUpDown NRowANumeric;
+        private System.Windows.Forms.NumericUpDown NColumnANumeric;
+        private System.Windows.Forms.NumericUpDown NRowBNumeric;
     }
 }
 
