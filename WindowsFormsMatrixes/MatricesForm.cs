@@ -15,7 +15,7 @@ namespace WindowsFormsMatrixes {
             InitializeComponent();
         }
 
-        public static Matrix ConvertStringToMatrix(string s) {
+        private static Matrix ConvertStringToMatrix(string s) {
             (int N, int M) = GetMatrixSize(s);
             double[,] data = new double[N, M];
 
@@ -67,71 +67,129 @@ namespace WindowsFormsMatrixes {
             return (N, M);
         }
 
-        public void GenerateAButton_Click(object sender, EventArgs e) {
-            int N = int.Parse(NColumnANumeric.Value.ToString());
-            int M = int.Parse(NRowANumeric.Value.ToString());
-            if (N < 0 || M < 0) {
-                N = Math.Abs(N);
-                M = Math.Abs(M);
+        private void PrintErrorA(string message) {
+            ErrorALabel.Text = message;
+        }
+
+        private void ClearErrorA() {
+            ErrorALabel.Text = "";
+        }
+
+        private void PrintErrorB(string message) {
+            ErrorBLabel.Text = message;
+        }
+
+        private void ClearErrorB() {
+            ErrorBLabel.Text = "";
+        }
+
+        private void GenerateAButton_Click(object sender, EventArgs e) {
+            ClearErrorA();
+            try {
+                int N = int.Parse(NColumnANumeric.Value.ToString());
+                int M = int.Parse(NRowANumeric.Value.ToString());
+                if (N < 0 || M < 0) {
+                    N = Math.Abs(N);
+                    M = Math.Abs(M);
+                }
+                NColumnANumeric.Value = N;
+                NRowANumeric.Value = M;
+                Matrix newMatrix = new Matrix(N, M, new Random());
+                ARichTextBox.Text = newMatrix.ToString();
+            } catch (Exception err) {
+                PrintErrorA(err.Message);
             }
-            NColumnANumeric.Value = N;
-            NRowANumeric.Value = M;
-            Matrix newMatrix = new Matrix(N, M, new Random());
-            ARichTextBox.Text = newMatrix.ToString();
         }
 
         private void ClearAButton_Click(object sender, EventArgs e) {
+            ClearErrorA();
             ARichTextBox.Clear();
         }
 
         private void TransponseAButton_Click(object sender, EventArgs e) {
-            Matrix transponsedMatrix = ConvertStringToMatrix(ARichTextBox.Text.ToString()).Transpose();
-            ARichTextBox.Text = transponsedMatrix.ToString();
+            ClearErrorA();
+            try {
+                Matrix transponsedMatrix = ConvertStringToMatrix(ARichTextBox.Text.ToString()).Transpose();
+                ARichTextBox.Text = transponsedMatrix.ToString();
+            } catch (Exception err) {
+                PrintErrorA(err.Message);
+            }
         }
 
         private void DeterminantAButton_Click(object sender, EventArgs e) {
-            double determinant = ConvertStringToMatrix(ARichTextBox.Text.ToString()).Determinant();
-            MessageBox.Show($"Определитель матрицы: {determinant:0.00}", "Определитель");
+            ClearErrorA();
+            try {
+                double determinant = ConvertStringToMatrix(ARichTextBox.Text.ToString()).Determinant();
+                MessageBox.Show($"Определитель матрицы: {determinant:0.00}", "Определитель");
+            } catch (Exception err) {
+                PrintErrorA(err.Message);
+            }
         }
 
         private void MultiplyAButton_Click(object sender, EventArgs e) {
-            int multiplier = int.Parse(MultiplierANumeric.Value.ToString());
-            Matrix newMatrix = ConvertStringToMatrix(ARichTextBox.Text.ToString()) * multiplier;
-            ARichTextBox.Text = newMatrix.ToString();
+            ClearErrorA();
+            try {
+                int multiplier = int.Parse(MultiplierANumeric.Value.ToString());
+                Matrix newMatrix = ConvertStringToMatrix(ARichTextBox.Text.ToString()) * multiplier;
+                ARichTextBox.Text = newMatrix.ToString();
+            } catch (Exception err) {
+                PrintErrorA(err.Message);
+            }
         }
 
         private void RaistoToPowerAButton_Click(object sender, EventArgs e) {
-            int argument = int.Parse(ArgumentANumeric.Value.ToString());
-            Matrix newMatrix = ConvertStringToMatrix(ARichTextBox.Text.ToString()) ^ argument;
-            ArgumentANumeric.Value = argument;
-            ARichTextBox.Text = newMatrix.ToString();
+            ClearErrorA();
+            try {
+                int argument = int.Parse(ArgumentANumeric.Value.ToString());
+                Matrix newMatrix = ConvertStringToMatrix(ARichTextBox.Text.ToString()) ^ argument;
+                ArgumentANumeric.Value = argument;
+                ARichTextBox.Text = newMatrix.ToString();
+            } catch (Exception err) {
+                PrintErrorA(err.Message);
+            }
         }
 
         private void ReverseAButton_Click(object sender, EventArgs e) {
-            Matrix inversedMatrix = ConvertStringToMatrix(ARichTextBox.Text.ToString()).Inverse();
-            ARichTextBox.Text = inversedMatrix.ToString();
+            ClearErrorA();
+            try {
+                Matrix inversedMatrix = ConvertStringToMatrix(ARichTextBox.Text.ToString()).Inverse();
+                ARichTextBox.Text = inversedMatrix.ToString();
+            } catch (Exception err) {
+                PrintErrorA(err.Message);
+            }
         }
 
         private void ClearBButton_Click(object sender, EventArgs e) {
+            ClearErrorB();
             BRichTextBox.Clear();
         }
 
         private void GenerateBButton_Click(object sender, EventArgs e) {
-            int N = int.Parse(NColumnBNumeric.Value.ToString());
-            int M = int.Parse(NRowBNumeric.Value.ToString());
-            if (N < 0 || M < 0) {
-                N = Math.Abs(N);
-                M = Math.Abs(M);
+            ClearErrorB();
+            try {
+                int N = int.Parse(NColumnBNumeric.Value.ToString());
+                int M = int.Parse(NRowBNumeric.Value.ToString());
+                if (N < 0 || M < 0) {
+                    N = Math.Abs(N);
+                    M = Math.Abs(M);
+                }
+                NColumnBNumeric.Value = N;
+                NRowBNumeric.Value = M;
+                Matrix newMatrix = new Matrix(N, M, new Random());
+                BRichTextBox.Text = newMatrix.ToString();
+            } catch (Exception err) {
+                PrintErrorB(err.Message);
             }
-            NColumnBNumeric.Value = N;
-            NRowBNumeric.Value = M;
-            Matrix newMatrix = new Matrix(N, M, new Random());
-            BRichTextBox.Text = newMatrix.ToString();
         }
 
         private void TransponseBButton_Click(object sender, EventArgs e) {
-            Matrix transponsedMatrix = ConvertStringToMatrix(BRichTextBox.Text.ToString()).Transpose();
-            BRichTextBox.Text = transponsedMatrix.ToString();
+            ClearErrorB();
+            try {
+                Matrix transponsedMatrix = ConvertStringToMatrix(BRichTextBox.Text.ToString()).Transpose();
+                BRichTextBox.Text = transponsedMatrix.ToString();
+            } catch (Exception err) {
+                PrintErrorB(err.Message);
+            }
         }
 
         private void DeterminantBButton_Click(object sender, EventArgs e) {
@@ -140,40 +198,75 @@ namespace WindowsFormsMatrixes {
         }
 
         private void MultiplyBButton_Click(object sender, EventArgs e) {
-            int multiplier = int.Parse(MultiplierBNumeric.Value.ToString());
-            Matrix newMatrix = ConvertStringToMatrix(BRichTextBox.Text.ToString()) * multiplier;
-            BRichTextBox.Text = newMatrix.ToString();
+            ClearErrorB();
+            try {
+                int multiplier = int.Parse(MultiplierBNumeric.Value.ToString());
+                Matrix newMatrix = ConvertStringToMatrix(BRichTextBox.Text.ToString()) * multiplier;
+                BRichTextBox.Text = newMatrix.ToString();
+            } catch (Exception err) {
+                PrintErrorB(err.Message);
+            }
         }
 
         private void RaistoToPowerBButton_Click(object sender, EventArgs e) {
-            int argument = int.Parse(ArgumentBNumeric.Value.ToString());
-            Matrix newMatrix = ConvertStringToMatrix(BRichTextBox.Text.ToString()) ^ argument;
-            ArgumentANumeric.Value = argument;
-            BRichTextBox.Text = newMatrix.ToString();
+            ClearErrorB();
+            try {
+                int argument = int.Parse(ArgumentBNumeric.Value.ToString());
+                Matrix newMatrix = ConvertStringToMatrix(BRichTextBox.Text.ToString()) ^ argument;
+                ArgumentANumeric.Value = argument;
+                BRichTextBox.Text = newMatrix.ToString();
+            } catch (Exception err) {
+                PrintErrorB(err.Message);
+            }
         }
 
         private void ReverseBButton_Click(object sender, EventArgs e) {
-            Matrix inversedMatrix = ConvertStringToMatrix(BRichTextBox.Text.ToString()).Inverse();
-            BRichTextBox.Text = inversedMatrix.ToString();
+            ClearErrorB();
+            try {
+                Matrix inversedMatrix = ConvertStringToMatrix(BRichTextBox.Text.ToString()).Inverse();
+                BRichTextBox.Text = inversedMatrix.ToString();
+            } catch (Exception err) {
+                PrintErrorB(err.Message);
+            }
         }
 
         private void SumButton_Click(object sender, EventArgs e) {
-            Matrix a = ConvertStringToMatrix(ARichTextBox.Text.ToString());
-            Matrix b = ConvertStringToMatrix(BRichTextBox.Text.ToString());
-            CRichTextBox.Text = (a + b).ToString();
-
+            ClearErrorA();
+            ClearErrorB();
+            try {
+                Matrix a = ConvertStringToMatrix(ARichTextBox.Text.ToString());
+                Matrix b = ConvertStringToMatrix(BRichTextBox.Text.ToString());
+                CRichTextBox.Text = (a + b).ToString();
+            } catch (Exception err) {
+                PrintErrorA(err.Message);
+                PrintErrorB(err.Message);
+            }
         }
 
         private void SubtractionButton_Click(object sender, EventArgs e) {
-            Matrix a = ConvertStringToMatrix(ARichTextBox.Text.ToString());
-            Matrix b = ConvertStringToMatrix(BRichTextBox.Text.ToString());
-            CRichTextBox.Text = (a - b).ToString();
+            ClearErrorA();
+            ClearErrorB();
+            try {
+                Matrix a = ConvertStringToMatrix(ARichTextBox.Text.ToString());
+                Matrix b = ConvertStringToMatrix(BRichTextBox.Text.ToString());
+                CRichTextBox.Text = (a - b).ToString();
+            } catch (Exception err) {
+                PrintErrorA(err.Message);
+                PrintErrorB(err.Message);
+            }
         }
 
         private void MultiplyButton_Click(object sender, EventArgs e) {
-            Matrix a = ConvertStringToMatrix(ARichTextBox.Text.ToString());
-            Matrix b = ConvertStringToMatrix(BRichTextBox.Text.ToString());
-            CRichTextBox.Text = (a * b).ToString();
+            ClearErrorA();
+            ClearErrorB();
+            try {
+                Matrix a = ConvertStringToMatrix(ARichTextBox.Text.ToString());
+                Matrix b = ConvertStringToMatrix(BRichTextBox.Text.ToString());
+                CRichTextBox.Text = (a * b).ToString();
+            } catch (Exception err) {
+                PrintErrorA(err.Message);
+                PrintErrorB(err.Message);
+            }
         }
 
         private void ARichTextBox_KeyPress(object sender, KeyPressEventArgs e) {
