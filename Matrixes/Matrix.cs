@@ -6,10 +6,26 @@ using System.Threading.Tasks;
 
 namespace ClassLibraryMatrices {
     public class Matrix : ICloneable {
+        /// <summary>
+        /// Двоичный массив, представляющий матрицу
+        /// </summary>
         private double[,] _data;
+
+        /// <summary>
+        /// Кол-во столбцов матрицы
+        /// </summary>
         public int N => _data.GetUpperBound(0) + 1;
+
+        /// <summary>
+        /// Кол-во рядов матрицы
+        /// </summary>
         public int M => _data.GetUpperBound(1) + 1;
 
+        /// <summary>
+        /// Создаёт квадратную матрицу размера n
+        /// </summary>
+        /// <param name="n">размер матрицы</param>
+        /// <param name="diagonal">если diagonal == true создаёт еденичную матрицу</param>
         public Matrix(int n, bool diagonal = false) {
             _data = new double[n, n];
             if (!diagonal) return;
@@ -18,6 +34,12 @@ namespace ClassLibraryMatrices {
             }
         }
 
+        /// <summary>
+        /// Создаёт матрицу размерами n*m
+        /// </summary>
+        /// <param name="n">Кол-во столбцов</param>
+        /// <param name="m">Кол-во строк</param>
+        /// <param name="r">Если мы не передаём объект Random, создаёт нулевую матрицу</param>
         public Matrix(int n, int m, Random r = null) {
             _data = new double[n, m];
             if (r == null) return;
@@ -28,12 +50,23 @@ namespace ClassLibraryMatrices {
             }
         }
 
+        /// <summary>
+        /// Создаёт матрицу базируясь на двойном массиве
+        /// </summary>
+        /// <param name="data">двойной массив</param>
         public Matrix(double[,] data) {
             _data = data;
         }
 
         public ref double this[int row, int column] => ref _data[row, column];
 
+        /// <summary>
+        /// Операция сложения матриц
+        /// </summary>
+        /// <param name="a">матрица a</param>
+        /// <param name="b">матрица b</param>
+        /// <returns>новая матрица</returns>
+        /// <exception cref="Exception">если матрицы не равны</exception>
         public static Matrix operator +(Matrix a, Matrix b) {
             bool isSameSize = a.N == b.N && a.M == b.M;
             if (!isSameSize) throw new Exception("Невозможно сложить матрицы не одинаковых размеров");
@@ -47,6 +80,13 @@ namespace ClassLibraryMatrices {
             return c;
         }
 
+        /// <summary>
+        /// Операция вычитания матриц
+        /// </summary>
+        /// <param name="a">матрица a</param>
+        /// <param name="b">матрица b</param>
+        /// <returns>новая матрица</returns>
+        /// <exception cref="Exception">если матрицы не равны</exception>
         public static Matrix operator -(Matrix a, Matrix b) {
             bool isSameSize = a.N == b.N && a.M == b.M;
             if (!isSameSize) throw new Exception("Невозможно сложить матрицы не одинаковых размеров");
@@ -60,6 +100,13 @@ namespace ClassLibraryMatrices {
             return c;
         }
 
+        /// <summary>
+        /// Операция умножения матриц
+        /// </summary>
+        /// <param name="a">матрица a</param>
+        /// <param name="b">матрица b</param>
+        /// <returns>новая матрица</returns>
+        /// <exception cref="Exception">если число столбцов в первом сомножителе не равно числу строк во втором</exception>
         public static Matrix operator *(Matrix a, Matrix b) {
             if (a.M != b.N) throw new Exception("Число столбцов в первом сомножителе должно быть равно числу строк во втором");
 
@@ -76,7 +123,14 @@ namespace ClassLibraryMatrices {
             return c;
         }
 
-        public static Matrix operator *(Matrix a, int b) {
+        /// <summary>
+        /// Операция умножения матриц
+        /// </summary>
+        /// <param name="a">матрица a</param>
+        /// <param name="b">число</param>
+        /// <returns>новая матрица</returns>
+        /// <exception cref="Exception">если число столбцов в первом сомножителе не равно числу строк во втором</exception>
+        public static Matrix operator *(Matrix a, double b) {
             Matrix c = new Matrix(a.N, a.M);
             for (int j = 0; j < c.M; j++) {
                 for (int i = 0; i < c.N; i++) {
@@ -86,7 +140,13 @@ namespace ClassLibraryMatrices {
             return c;
         }
 
-        public static Matrix operator *(int b, Matrix a) {
+        /// <summary>
+        /// Умножает каждый элемент матрицы на число b
+        /// </summary>
+        /// <param name="a">матрица a</param>
+        /// <param name="b">число b</param>
+        /// <returns>новая матрица</returns>
+        public static Matrix operator *(double b, Matrix a) {
             Matrix c = new Matrix(a.N, a.M);
             for (int j = 0; j < c.M; j++) {
                 for (int i = 0; i < c.N; i++) {
@@ -96,6 +156,12 @@ namespace ClassLibraryMatrices {
             return c;
         }
 
+        /// <summary>
+        /// Возводит в степень b матрицу a
+        /// </summary>
+        /// <param name="a">матрица a</param>
+        /// <param name="b">число b</param>
+        /// <returns>новая матрица</returns>
         public static Matrix operator ^(Matrix a, int b) {
             Matrix c;
             if (b == 0) {
@@ -104,18 +170,26 @@ namespace ClassLibraryMatrices {
             }
 
             c = (Matrix)a.Clone();
-            if (b < 0) c.Inverse();
+            if (b < 0) c = c.Inverse();
             int n = Math.Abs(b);
             for (int i = 1; i < n; i++) {
-                c = c * c;
+                c *= c;
             }
             return c;
         }
 
+        /// <summary>
+        /// Проверяем квадратная ли матрица
+        /// </summary>
+        /// <returns>True - матрица квадратная, false - матрица не квадратная</returns>
         public bool IsSquare() {
             return M == N;
         }
 
+        /// <summary>
+        /// Транспонирование матрицы
+        /// </summary>
+        /// <returns>новая матрица</returns>
         public Matrix Transpose() {
             double[,] newData = new double[M, N];
             for (int i = 0; i < M; i++) {
@@ -123,25 +197,37 @@ namespace ClassLibraryMatrices {
                     newData[i, j] = _data[j, i];
                 }
             }
-            _data = newData;
-            return this;
+            return new Matrix(newData);
         }
 
+        /// <summary>
+        /// Нахождение определителя
+        /// </summary>
+        /// <returns>определитель</returns>
+        /// <exception cref="Exception">если матрица не квадратная</exception>
         public double Determinant() {
             if (!IsSquare()) throw new Exception("Матрица должна быть квадратной для нахождения определителя");
             return CalculateDeterminant(_data);
         }
 
+        /// <summary>
+        /// Нахождение обратной матрицу
+        /// </summary>
+        /// <returns>новая матрица</returns>
+        /// <exception cref="Exception">если матрица не квадратная</exception>
         public Matrix Inverse() {
             if (!IsSquare()) throw new Exception("Для приведения матрицы к обратной матрица должна быть квадратной");
             Matrix reverseMatrix = new Matrix(N);
-            int stdout = E_GaussEliminationForward(this, out var e, out var p, out var u);
+            int stdout = GaussEliminationForward(this, out var e, out var p, out var u);
             if (stdout != 0) throw new Exception("Матрица не может быть приведена к обратной");
             GaussEliminationBackward(u, e * p, out reverseMatrix);
-            _data = reverseMatrix._data;
-            return this;
+            return reverseMatrix;
         }
 
+        /// <summary>
+        /// Конвертация матрицу в строчный вид
+        /// </summary>
+        /// <returns>строчный вид матрицы</returns>
         public override string ToString() {
             string s = "";
             for (int j = 0; j < M; j++) {
@@ -153,6 +239,18 @@ namespace ClassLibraryMatrices {
             return s;
         }
 
+        /// <summary>
+        /// Клонирование матрицы
+        /// </summary>
+        /// <returns>новая матрица</returns>
+        public object Clone() {
+            return new Matrix((double[,])_data.Clone());
+        }
+
+        /// <summary>
+        /// Рекурсивный способ нахождение определителя (взято из интернета)
+        /// </summary>
+        /// <returns>Определитель</returns>
         private double CalculateDeterminant(double[,] M) {
             if (M.GetLength(0) == 1) return M[0, 0];
 
@@ -173,7 +271,10 @@ namespace ClassLibraryMatrices {
             return determinant;
         }
 
-        private static int E_GaussEliminationForward(Matrix a, out Matrix e, out Matrix p, out Matrix u) {
+        /// <summary>
+        /// Функция необхадимая для вычисения обратной матрицы (взято из интернета)
+        /// </summary>
+        private static int GaussEliminationForward(Matrix a, out Matrix e, out Matrix p, out Matrix u) {
             e = new Matrix(a.N, true);
             p = new Matrix(a.N, true);
             u = (Matrix)a.Clone();
@@ -207,6 +308,9 @@ namespace ClassLibraryMatrices {
             return 0;
         }
 
+        /// <summary>
+        /// Функция необхадимая для вычисения обратной матрицы (взято из интернета)
+        /// </summary>
         private void GaussEliminationBackward(Matrix u, Matrix c, out Matrix x) {
             x = (Matrix)c.Clone();
             for (int i = x.N - 1; i >= 0; i--) {
@@ -222,15 +326,14 @@ namespace ClassLibraryMatrices {
             }
         }
 
+        /// <summary>
+        /// Функция необхадимая для вычисения обратной матрицы (взято из интернета)
+        /// </summary>
         private void ExchangeRows(int i, int j, int until = Int32.MaxValue) {
             until = Math.Min(M, until);
             for (int k = 0; k < until; k++) {
                 (_data[i, k], _data[j, k]) = (_data[j, k], _data[i, k]);
             }
-        }
-
-        public object Clone() {
-            return new Matrix((double[,])_data.Clone());
         }
     }
 }

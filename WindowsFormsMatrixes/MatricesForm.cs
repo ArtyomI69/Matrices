@@ -37,6 +37,9 @@ namespace WindowsFormsMatrixes {
                         curr = "";
                     }
                 }
+                if (curr.Length > 0) {
+                    data[idx, j] = double.Parse(curr);
+                }
             }
 
             return new Matrix(data);
@@ -68,223 +71,266 @@ namespace WindowsFormsMatrixes {
         }
 
         private void PrintErrorA(string message) {
-            ErrorALabel.Text = message;
+            ErrorA.Text = message;
         }
 
         private void ClearErrorA() {
-            ErrorALabel.Text = "";
+            ErrorA.Text = "";
         }
 
         private void PrintErrorB(string message) {
-            ErrorBLabel.Text = message;
+            ErrorB.Text = message;
         }
 
         private void ClearErrorB() {
-            ErrorBLabel.Text = "";
+            ErrorB.Text = "";
         }
 
-        private void GenerateAButton_Click(object sender, EventArgs e) {
+        private void GenerateA_Click(object sender, EventArgs e) {
             ClearErrorA();
             try {
-                int N = int.Parse(NColumnANumeric.Value.ToString());
-                int M = int.Parse(NRowANumeric.Value.ToString());
+                int N = int.Parse(MatrixANInput.Text);
+                int M = int.Parse(MatrixAMInput.Text);
                 if (N < 0 || M < 0) {
                     N = Math.Abs(N);
                     M = Math.Abs(M);
                 }
-                NColumnANumeric.Value = N;
-                NRowANumeric.Value = M;
+                MatrixANInput.Text = N.ToString();
+                MatrixAMInput.Text = M.ToString();
                 Matrix newMatrix = new Matrix(N, M, new Random());
-                ARichTextBox.Text = newMatrix.ToString();
+                MatrixAInput.Text = newMatrix.ToString();
+            } catch (FormatException err) {
+                PrintErrorA("N и M целые должны быть целыми чисами");
             } catch (Exception err) {
                 PrintErrorA(err.Message);
             }
         }
 
-        private void ClearAButton_Click(object sender, EventArgs e) {
+        private void ClearA_Click(object sender, EventArgs e) {
             ClearErrorA();
-            ARichTextBox.Clear();
+            MatrixAInput.Clear();
         }
 
-        private void TransponseAButton_Click(object sender, EventArgs e) {
+        private void TransponseA_Click(object sender, EventArgs e) {
             ClearErrorA();
             try {
-                Matrix transponsedMatrix = ConvertStringToMatrix(ARichTextBox.Text.ToString()).Transpose();
-                ARichTextBox.Text = transponsedMatrix.ToString();
+                Matrix transponsedMatrix = ConvertStringToMatrix(MatrixAInput.Text).Transpose();
+                MatrixAInput.Text = transponsedMatrix.ToString();
+            } catch (FormatException err) {
+                PrintErrorA("Введите матрицу в правильном формате");
             } catch (Exception err) {
                 PrintErrorA(err.Message);
             }
         }
 
-        private void DeterminantAButton_Click(object sender, EventArgs e) {
+        private void DeterminantA_Click(object sender, EventArgs e) {
             ClearErrorA();
             try {
-                double determinant = ConvertStringToMatrix(ARichTextBox.Text.ToString()).Determinant();
+                double determinant = ConvertStringToMatrix(MatrixAInput.Text).Determinant();
                 MessageBox.Show($"Определитель матрицы: {determinant:0.00}", "Определитель");
+            } catch (FormatException err) {
+                PrintErrorA("Введите матрицу в правильном формате");
             } catch (Exception err) {
                 PrintErrorA(err.Message);
             }
         }
 
-        private void MultiplyAButton_Click(object sender, EventArgs e) {
+        private void MultiplyA_Click(object sender, EventArgs e) {
             ClearErrorA();
             try {
-                int multiplier = int.Parse(MultiplierANumeric.Value.ToString());
-                Matrix newMatrix = ConvertStringToMatrix(ARichTextBox.Text.ToString()) * multiplier;
-                ARichTextBox.Text = newMatrix.ToString();
+                double multiplier = double.Parse(MatrixAMultiplierInput.Text);
+                Matrix newMatrix = ConvertStringToMatrix(MatrixAInput.Text) * multiplier;
+                MatrixAInput.Text = newMatrix.ToString();
+            } catch (FormatException err) {
+                PrintErrorA("Введите матрицу и множитель в правильном формате");
             } catch (Exception err) {
                 PrintErrorA(err.Message);
             }
         }
 
-        private void RaistoToPowerAButton_Click(object sender, EventArgs e) {
+        private void RaistoToPowerA_Click(object sender, EventArgs e) {
             ClearErrorA();
             try {
-                int argument = int.Parse(ArgumentANumeric.Value.ToString());
-                Matrix newMatrix = ConvertStringToMatrix(ARichTextBox.Text.ToString()) ^ argument;
-                ArgumentANumeric.Value = argument;
-                ARichTextBox.Text = newMatrix.ToString();
+                int argument = int.Parse(MatrixAArumentInput.Text);
+                Matrix newMatrix = ConvertStringToMatrix(MatrixAInput.Text) ^ argument;
+                MatrixAArumentInput.Text = argument.ToString();
+                MatrixAInput.Text = newMatrix.ToString();
+            } catch (FormatException err) {
+                PrintErrorA("Введите аргумент и матрицу в нужном формате");
             } catch (Exception err) {
                 PrintErrorA(err.Message);
             }
         }
 
-        private void ReverseAButton_Click(object sender, EventArgs e) {
+        private void ReverseA_Click(object sender, EventArgs e) {
             ClearErrorA();
             try {
-                Matrix inversedMatrix = ConvertStringToMatrix(ARichTextBox.Text.ToString()).Inverse();
-                ARichTextBox.Text = inversedMatrix.ToString();
+                Matrix inversedMatrix = ConvertStringToMatrix(MatrixAInput.Text).Inverse();
+                MatrixAInput.Text = inversedMatrix.ToString();
+            } catch (FormatException err) {
+                PrintErrorA("Введите матрицу в правильном формате");
             } catch (Exception err) {
                 PrintErrorA(err.Message);
             }
         }
 
-        private void ClearBButton_Click(object sender, EventArgs e) {
+        private void GenerateB_Click(object sender, EventArgs e) {
             ClearErrorB();
-            BRichTextBox.Clear();
-        }
-
-        private void GenerateBButton_Click(object sender, EventArgs e) {
-            ClearErrorB();
             try {
-                int N = int.Parse(NColumnBNumeric.Value.ToString());
-                int M = int.Parse(NRowBNumeric.Value.ToString());
+                int N = int.Parse(MatrixBNInput.Text);
+                int M = int.Parse(MatrixBMInput.Text);
                 if (N < 0 || M < 0) {
                     N = Math.Abs(N);
                     M = Math.Abs(M);
                 }
-                NColumnBNumeric.Value = N;
-                NRowBNumeric.Value = M;
+                MatrixBNInput.Text = N.ToString();
+                MatrixBMInput.Text = M.ToString();
                 Matrix newMatrix = new Matrix(N, M, new Random());
-                BRichTextBox.Text = newMatrix.ToString();
+                MatrixBInput.Text = newMatrix.ToString();
+            } catch (FormatException err) {
+                PrintErrorB("Введите матрицу в правильном формате");
             } catch (Exception err) {
                 PrintErrorB(err.Message);
             }
         }
 
-        private void TransponseBButton_Click(object sender, EventArgs e) {
+        private void ClearB_Click(object sender, EventArgs e) {
+            ClearErrorB();
+            MatrixBInput.Clear();
+        }
+
+        private void TransponseB_Click(object sender, EventArgs e) {
             ClearErrorB();
             try {
-                Matrix transponsedMatrix = ConvertStringToMatrix(BRichTextBox.Text.ToString()).Transpose();
-                BRichTextBox.Text = transponsedMatrix.ToString();
+                Matrix transponsedMatrix = ConvertStringToMatrix(MatrixBInput.Text).Transpose();
+                MatrixBInput.Text = transponsedMatrix.ToString();
+            } catch (FormatException err) {
+                PrintErrorB("Введите матрицу в правильном формате");
             } catch (Exception err) {
                 PrintErrorB(err.Message);
             }
         }
 
-        private void DeterminantBButton_Click(object sender, EventArgs e) {
-            double determinant = ConvertStringToMatrix(BRichTextBox.Text.ToString()).Determinant();
-            MessageBox.Show($"Определитель матрицы: {determinant:0.00}", "Определитель");
-        }
-
-        private void MultiplyBButton_Click(object sender, EventArgs e) {
+        private void DeterminantB_Click(object sender, EventArgs e) {
             ClearErrorB();
             try {
-                int multiplier = int.Parse(MultiplierBNumeric.Value.ToString());
-                Matrix newMatrix = ConvertStringToMatrix(BRichTextBox.Text.ToString()) * multiplier;
-                BRichTextBox.Text = newMatrix.ToString();
+                double determinant = ConvertStringToMatrix(MatrixBInput.Text).Determinant();
+                MessageBox.Show($"Определитель матрицы: {determinant:0.00}", "Определитель");
+            } catch (FormatException err) {
+                PrintErrorB("Введите матрицу в правильном формате");
             } catch (Exception err) {
                 PrintErrorB(err.Message);
             }
         }
 
-        private void RaistoToPowerBButton_Click(object sender, EventArgs e) {
+        private void MultiplyB_Click(object sender, EventArgs e) {
             ClearErrorB();
             try {
-                int argument = int.Parse(ArgumentBNumeric.Value.ToString());
-                Matrix newMatrix = ConvertStringToMatrix(BRichTextBox.Text.ToString()) ^ argument;
-                ArgumentANumeric.Value = argument;
-                BRichTextBox.Text = newMatrix.ToString();
+                double multiplier = double.Parse(MatrixBMultiplierInput.Text);
+                Matrix newMatrix = ConvertStringToMatrix(MatrixBInput.Text) * multiplier;
+                MatrixBInput.Text = newMatrix.ToString();
+            } catch (FormatException err) {
+                PrintErrorB("Введите матрицу и множитель в правильном формате");
             } catch (Exception err) {
                 PrintErrorB(err.Message);
             }
         }
 
-        private void ReverseBButton_Click(object sender, EventArgs e) {
+        private void RaistoToPowerB_Click(object sender, EventArgs e) {
             ClearErrorB();
             try {
-                Matrix inversedMatrix = ConvertStringToMatrix(BRichTextBox.Text.ToString()).Inverse();
-                BRichTextBox.Text = inversedMatrix.ToString();
+                int argument = int.Parse(MatrixBArumentInput.Text);
+                Matrix newMatrix = ConvertStringToMatrix(MatrixBInput.Text) ^ argument;
+                MatrixBArumentInput.Text = argument.ToString();
+                MatrixBInput.Text = newMatrix.ToString();
+            } catch (FormatException err) {
+                PrintErrorB("Введите матрицу и аргумент в правильном формате");
             } catch (Exception err) {
                 PrintErrorB(err.Message);
             }
         }
 
-        private void SumButton_Click(object sender, EventArgs e) {
-            ClearErrorA();
+        private void ReverseB_Click(object sender, EventArgs e) {
             ClearErrorB();
             try {
-                Matrix a = ConvertStringToMatrix(ARichTextBox.Text.ToString());
-                Matrix b = ConvertStringToMatrix(BRichTextBox.Text.ToString());
-                CRichTextBox.Text = (a + b).ToString();
+                Matrix inversedMatrix = ConvertStringToMatrix(MatrixBInput.Text).Inverse();
+                MatrixBInput.Text = inversedMatrix.ToString();
+            } catch (FormatException err) {
+                PrintErrorB("Введите матрицу в правильном формате");
             } catch (Exception err) {
-                PrintErrorA(err.Message);
                 PrintErrorB(err.Message);
             }
         }
 
-        private void SubtractionButton_Click(object sender, EventArgs e) {
-            ClearErrorA();
-            ClearErrorB();
-            try {
-                Matrix a = ConvertStringToMatrix(ARichTextBox.Text.ToString());
-                Matrix b = ConvertStringToMatrix(BRichTextBox.Text.ToString());
-                CRichTextBox.Text = (a - b).ToString();
-            } catch (Exception err) {
-                PrintErrorA(err.Message);
-                PrintErrorB(err.Message);
-            }
-        }
-
-        private void MultiplyButton_Click(object sender, EventArgs e) {
-            ClearErrorA();
-            ClearErrorB();
-            try {
-                Matrix a = ConvertStringToMatrix(ARichTextBox.Text.ToString());
-                Matrix b = ConvertStringToMatrix(BRichTextBox.Text.ToString());
-                CRichTextBox.Text = (a * b).ToString();
-            } catch (Exception err) {
-                PrintErrorA(err.Message);
-                PrintErrorB(err.Message);
-            }
-        }
-
-        private void ARichTextBox_KeyPress(object sender, KeyPressEventArgs e) {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ',') && (e.KeyChar != ' ')) {
+        private void OnlyNumbers(object sender, KeyPressEventArgs e) {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ',') && (e.KeyChar != ' ') && (e.KeyChar != '-')) {
                 e.Handled = true;
             }
         }
 
-        private void BRichTextBox_KeyPress(object sender, KeyPressEventArgs e) {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ',') && (e.KeyChar != ' ')) {
-                e.Handled = true;
+        private void Swap_Click(object sender, EventArgs e) {
+            string tmp = ErrorA.Text;
+            ErrorA.Text = ErrorB.Text;
+            ErrorB.Text = tmp;
+            tmp = MatrixAMInput.Text;
+            MatrixAMInput.Text = MatrixBInput.Text;
+            MatrixBInput.Text = tmp;
+        }
+
+        private void Sum_Click(object sender, EventArgs e) {
+            ClearErrorA();
+            ClearErrorB();
+            try {
+                Matrix a = ConvertStringToMatrix(MatrixAInput.Text);
+                Matrix b = ConvertStringToMatrix(MatrixBInput.Text);
+                Matrix c = a + b;
+                MatrixOutput.Text = c.ToString();
+            } catch (FormatException err) {
+                PrintErrorA("Введите матрицы в нужном формате");
+            } catch (Exception err) {
+                PrintErrorA(err.Message);
             }
         }
 
-        private void CRichTextBox_KeyPress(object sender, KeyPressEventArgs e) {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ',') && (e.KeyChar != ' ')) {
-                e.Handled = true;
+        private void Substraction_Click(object sender, EventArgs e) {
+            ClearErrorA();
+            ClearErrorB();
+            try {
+
+                Matrix a = ConvertStringToMatrix(MatrixAInput.Text);
+                Matrix b = ConvertStringToMatrix(MatrixBInput.Text);
+                Matrix c = a - b;
+                MatrixOutput.Text = c.ToString();
+            } catch (FormatException err) {
+                PrintErrorA("Введите матрицы в нужном формате");
+            } catch (Exception err) {
+                PrintErrorA(err.Message);
             }
+        }
+
+        private void Multiplication_Click(object sender, EventArgs e) {
+            ClearErrorA();
+            ClearErrorB();
+            try {
+                Matrix a = ConvertStringToMatrix(MatrixAInput.Text);
+                Matrix b = ConvertStringToMatrix(MatrixBInput.Text);
+                Matrix c = a * b;
+                MatrixOutput.Text = c.ToString();
+            } catch (FormatException err) {
+                PrintErrorA("Введите матрицы в нужном формате");
+            } catch (Exception err) {
+                PrintErrorA(err.Message);
+            }
+        }
+
+        private void InsertResultInA_Click(object sender, EventArgs e) {
+            MatrixAInput.Text = MatrixOutput.Text;
+            MatrixOutput.Clear();
+        }
+
+        private void InsertResultInB_Click(object sender, EventArgs e) {
+            MatrixBInput.Text = MatrixOutput.Text;
+            MatrixOutput.Clear();
         }
     }
 }
