@@ -100,7 +100,7 @@ namespace WindowsFormsMatrixes {
                 Matrix newMatrix = new Matrix(N, M, new Random());
                 MatrixAInput.Text = newMatrix.ToString();
             } catch (FormatException err) {
-                PrintErrorA("N и M целые должны быть целыми чисами");
+                PrintErrorA("N и M целые должны быть целыми числами");
             } catch (Exception err) {
                 PrintErrorA(err.Message);
             }
@@ -156,7 +156,7 @@ namespace WindowsFormsMatrixes {
                 MatrixAArumentInput.Text = argument.ToString();
                 MatrixAInput.Text = newMatrix.ToString();
             } catch (FormatException err) {
-                PrintErrorA("Введите аргумент и матрицу в нужном формате");
+                PrintErrorA("Введите аргумент и матрицу в правильном формате");
             } catch (Exception err) {
                 PrintErrorA(err.Message);
             }
@@ -188,7 +188,7 @@ namespace WindowsFormsMatrixes {
                 Matrix newMatrix = new Matrix(N, M, new Random());
                 MatrixBInput.Text = newMatrix.ToString();
             } catch (FormatException err) {
-                PrintErrorB("Введите матрицу в правильном формате");
+                PrintErrorB("N и M целые должны быть целыми числами");
             } catch (Exception err) {
                 PrintErrorB(err.Message);
             }
@@ -272,8 +272,8 @@ namespace WindowsFormsMatrixes {
             string tmp = ErrorA.Text;
             ErrorA.Text = ErrorB.Text;
             ErrorB.Text = tmp;
-            tmp = MatrixAMInput.Text;
-            MatrixAMInput.Text = MatrixBInput.Text;
+            tmp = MatrixAInput.Text;
+            MatrixAInput.Text = MatrixBInput.Text;
             MatrixBInput.Text = tmp;
         }
 

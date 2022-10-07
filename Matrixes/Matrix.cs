@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibraryMatrices {
     public class Matrix : ICloneable {
+        #region Поля
         /// <summary>
         /// Двоичный массив, представляющий матрицу
         /// </summary>
@@ -21,6 +22,10 @@ namespace ClassLibraryMatrices {
         /// </summary>
         public int M => _data.GetUpperBound(1) + 1;
 
+        public ref double this[int row, int column] => ref _data[row, column];
+        #endregion
+
+        #region Конструкторы
         /// <summary>
         /// Создаёт квадратную матрицу размера n
         /// </summary>
@@ -57,9 +62,9 @@ namespace ClassLibraryMatrices {
         public Matrix(double[,] data) {
             _data = data;
         }
+        #endregion
 
-        public ref double this[int row, int column] => ref _data[row, column];
-
+        #region Операции
         /// <summary>
         /// Операция сложения матриц
         /// </summary>
@@ -110,17 +115,15 @@ namespace ClassLibraryMatrices {
         public static Matrix operator *(Matrix a, Matrix b) {
             if (a.M != b.N) throw new Exception("Число столбцов в первом сомножителе должно быть равно числу строк во втором");
 
-            Matrix c = new Matrix(a.N, b.M);
-            for (int i = 0; i < c.N; i++) {
-                for (int j = 0; j < c.M; j++) {
-                    double s = 0;
-                    for (int m = 0; m < a.M; m++) {
-                        s += a[i, m] * b[m, j];
+            double[,] ans = new double[a.M, b.N];
+            for (int i = 0; i < b.M; i++) {
+                for (int j = 0; j < a.N; j++) {
+                    for (int k = 0; k < a.M; k++) {
+                        ans[i, j] += b[i, k] * a[k, j];
                     }
-                    c[i, j] = s;
                 }
             }
-            return c;
+            return new Matrix(ans);
         }
 
         /// <summary>
@@ -177,7 +180,9 @@ namespace ClassLibraryMatrices {
             }
             return c;
         }
+        #endregion
 
+        #region Public Методы
         /// <summary>
         /// Проверяем квадратная ли матрица
         /// </summary>
@@ -207,7 +212,7 @@ namespace ClassLibraryMatrices {
         /// <exception cref="Exception">если матрица не квадратная</exception>
         public double Determinant() {
             if (!IsSquare()) throw new Exception("Матрица должна быть квадратной для нахождения определителя");
-            return CalculateDeterminant(_data);
+            return CalculateDeterminant(this);
         }
 
         /// <summary>
@@ -217,11 +222,11 @@ namespace ClassLibraryMatrices {
         /// <exception cref="Exception">если матрица не квадратная</exception>
         public Matrix Inverse() {
             if (!IsSquare()) throw new Exception("Для приведения матрицы к обратной матрица должна быть квадратной");
-            Matrix reverseMatrix = new Matrix(N);
-            int stdout = GaussEliminationForward(this, out var e, out var p, out var u);
-            if (stdout != 0) throw new Exception("Матрица не может быть приведена к обратной");
-            GaussEliminationBackward(u, e * p, out reverseMatrix);
-            return reverseMatrix;
+
+            if (Math.Abs(Determinant()) <= 0.000000001) throw new ArgumentException("Обратная матрица не существует!");
+            double k = 1 / Determinant();
+            Matrix minorMatrix = MinorMatrix();
+            return minorMatrix.Transpose() * k;
         }
 
         /// <summary>
@@ -246,94 +251,62 @@ namespace ClassLibraryMatrices {
         public object Clone() {
             return new Matrix((double[,])_data.Clone());
         }
+        #endregion
 
+        #region Private Методы
         /// <summary>
         /// Рекурсивный способ нахождение определителя (взято из интернета)
         /// </summary>
         /// <returns>Определитель</returns>
-        private double CalculateDeterminant(double[,] M) {
-            if (M.GetLength(0) == 1) return M[0, 0];
+        private double CalculateDeterminant(Matrix m) {
+            if (m.N == 1) return m[0, 0];
 
-            double determinant = 0;
-            int R = M.GetLength(0);
-            int i = 0;
-            for (int j = 0; j < R; j++) {
-                double[,] T = new double[R - 1, R - 1];
-                for (int ii = 0; ii < R - 1; ii++) {
-                    for (int jj = 0; jj < R - 1; jj++) {
-                        int iii = (ii < i) ? (ii) : (ii + 1);
-                        int jjj = (jj < j) ? (jj) : (jj + 1);
-                        T[ii, jj] = M[iii, jjj];
-                    }
-                    determinant += (((i + j) % 2 == 0) ? 1 : -1) * M[i, j] * CalculateDeterminant(T);
-                }
-            }
-            return determinant;
+            double det = 0;
+            int length = m.M;
+
+            if (length == 1) det = m._data[0, 0];
+            if (length == 2) det = m._data[0, 0] * m._data[1, 1] - m._data[0, 1] * m._data[1, 0];
+
+            if (length > 2)
+                for (int i = 0; i < m.N; i++)
+                    det += Math.Pow(-1, 0 + i) * m._data[0, i] * CalculateDeterminant(m.GetMinor(0, i));
+            return det;
         }
 
         /// <summary>
-        /// Функция необхадимая для вычисения обратной матрицы (взято из интернета)
+        /// Получение минора матрицы.
         /// </summary>
-        private static int GaussEliminationForward(Matrix a, out Matrix e, out Matrix p, out Matrix u) {
-            e = new Matrix(a.N, true);
-            p = new Matrix(a.N, true);
-            u = (Matrix)a.Clone();
-            for (int i = 0; i < a.N; i++) {
-                if (Math.Abs(u[i, i]) < Double.Epsilon) {
-                    int iReverse = i;
-                    for (int j = i + 1; j < a.N; j++) {
-                        if (Math.Abs(u[j, i]) > Double.Epsilon) {
-                            iReverse = j;
-                            break;
-                        }
-                    }
-
-                    if (iReverse == i) {
-                        return -1;
-                    }
-                    e.ExchangeRows(iReverse, i, i);
-                    p.ExchangeRows(iReverse, i);
-                    u.ExchangeRows(iReverse, i);
-                }
-                Matrix eTmp = new Matrix(a.N, true);
-                for (int j = i + 1; j < a.N; j++) {
-                    double coeff = u[j, i] / u[i, i];
-                    eTmp[j, i] = -coeff;
-                    for (int k = i; k < a.M; k++) {
-                        u[j, k] -= u[i, k] * coeff;
+        /// <param name="row"> индекс строки </param>
+        /// <param name="column"> индекс столбца </param>
+        /// <returns> минор матрицы </returns>
+        private Matrix GetMinor(int row, int column) {
+            double[,] minor = new double[M - 1, N - 1];
+            for (int i = 0; i < M; i++) {
+                for (int j = 0; j < N; j++) {
+                    if ((i != row) || (j != column)) {
+                        if (i > row && j < column) minor[i - 1, j] = _data[i, j];
+                        if (i < row && j > column) minor[i, j - 1] = _data[i, j];
+                        if (i > row && j > column) minor[i - 1, j - 1] = _data[i, j];
+                        if (i < row && j < column) minor[i, j] = _data[i, j];
                     }
                 }
-                e = eTmp * e;
             }
-            return 0;
+            return new Matrix(minor);
         }
 
         /// <summary>
-        /// Функция необхадимая для вычисения обратной матрицы (взято из интернета)
+        /// Поиск матрицы миноров (алгебраических дополнений)
         /// </summary>
-        private void GaussEliminationBackward(Matrix u, Matrix c, out Matrix x) {
-            x = (Matrix)c.Clone();
-            for (int i = x.N - 1; i >= 0; i--) {
-                for (int j = 0; j < x.M; j++) {
-                    x[i, j] /= u[i, i];
-                }
-                for (int j = 0; j < i; j++) {
-                    double coeff = u[j, i];
-                    for (int k = 0; k < x.M; k++) {
-                        x[j, k] -= coeff * x[i, k];
-                    }
-                }
-            }
-        }
+        /// <returns> матрица миноров </returns>
+        public Matrix MinorMatrix() {
+            double[,] ans = new double[M, N];
 
-        /// <summary>
-        /// Функция необхадимая для вычисения обратной матрицы (взято из интернета)
-        /// </summary>
-        private void ExchangeRows(int i, int j, int until = Int32.MaxValue) {
-            until = Math.Min(M, until);
-            for (int k = 0; k < until; k++) {
-                (_data[i, k], _data[j, k]) = (_data[j, k], _data[i, k]);
-            }
+            for (int i = 0; i < M; i++)
+                for (int j = 0; j < N; j++)
+                    ans[i, j] = Math.Pow(-1, i + j) * CalculateDeterminant(GetMinor(i, j));
+
+            return new Matrix(ans);
         }
+        #endregion
     }
 }
