@@ -50,7 +50,7 @@ namespace ClassLibraryMatrices {
             if (r == null) return;
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < m; j++) {
-                    _data[i, j] = r.Next(0, 9);
+                    _data[i, j] = r.Next(-9, 9);
                 }
             }
         }

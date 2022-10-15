@@ -28,6 +28,22 @@ namespace ClassLibraryMatrices {
             B = b;
         }
 
+        public List<double> Solve() {
+            List<double> result = new List<double>();
+            double mainDeterminant = A.Determinant();
+            double[] determinants = CalculateDeterminants();
+
+            if (mainDeterminant == 0) {
+                if (AreDeterminantsEqualZero(determinants)) throw new Exception("The system of equaitons is undetermined");
+                else throw new Exception("The system of equations is incompatible");
+            }
+
+            for (int i = 0; i < N; i++) {
+                result.Add(determinants[i] / mainDeterminant);
+            }
+            return result;
+        }
+
         public override string ToString() {
             string s = "";
             for (int j = 0; j < N; j++) {
@@ -76,6 +92,25 @@ namespace ClassLibraryMatrices {
         private bool AreCoefBeforeEqualZero(int row, int column) {
             for (int i = 0; i < column; i++) {
                 if (A[i, row] != 0) return false;
+            }
+            return true;
+        }
+
+        private double[] CalculateDeterminants() {
+            double[] determinants = new double[N];
+            for (int j = 0; j < N; j++) {
+                Matrix T = A.Clone() as Matrix;
+                for (int i = 0; i < N; i++) {
+                    T[j, i] = B[0, i];
+                }
+                determinants[j] = T.Determinant();
+            }
+            return determinants;
+        }
+
+        private bool AreDeterminantsEqualZero(double[] determinants) {
+            foreach (double determinant in determinants) {
+                if (determinant != 0) return false;
             }
             return true;
         }
