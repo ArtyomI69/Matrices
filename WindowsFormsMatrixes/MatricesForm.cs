@@ -262,12 +262,6 @@ namespace WindowsFormsMatrixes {
             }
         }
 
-        private void OnlyNumbers(object sender, KeyPressEventArgs e) {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ',') && (e.KeyChar != ' ') && (e.KeyChar != '-')) {
-                e.Handled = true;
-            }
-        }
-
         private void Swap_Click(object sender, EventArgs e) {
             string tmp = ErrorA.Text;
             ErrorA.Text = ErrorB.Text;
@@ -337,6 +331,18 @@ namespace WindowsFormsMatrixes {
         private void InsertResultInB_Click(object sender, EventArgs e) {
             MatrixBInput.Text = MatrixOutput.Text;
             MatrixOutput.Clear();
+        }
+
+        private void OnlyNumbers(object sender, KeyPressEventArgs e) {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ',') && (e.KeyChar != ' ') && (e.KeyChar != '-')) {
+                e.Handled = true;
+            }
+        }
+
+        private void OnlyIntNumbers(object sender, KeyPressEventArgs e) {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ' ') && (e.KeyChar != '-')) {
+                e.Handled = true;
+            }
         }
     }
 }

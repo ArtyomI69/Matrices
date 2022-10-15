@@ -267,7 +267,7 @@
             this.MatrixBArumentInput.Size = new System.Drawing.Size(57, 37);
             this.MatrixBArumentInput.TabIndex = 2;
             this.MatrixBArumentInput.Text = "";
-            this.MatrixBArumentInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnlyNumbers);
+            this.MatrixBArumentInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnlyIntNumbers);
             // 
             // RaiseToPowerB
             // 
@@ -332,7 +332,7 @@
             this.MatrixBMInput.Size = new System.Drawing.Size(126, 43);
             this.MatrixBMInput.TabIndex = 3;
             this.MatrixBMInput.Text = "";
-            this.MatrixBMInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnlyNumbers);
+            this.MatrixBMInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnlyIntNumbers);
             // 
             // label5
             // 
@@ -367,7 +367,7 @@
             this.MatrixBNInput.Size = new System.Drawing.Size(124, 43);
             this.MatrixBNInput.TabIndex = 2;
             this.MatrixBNInput.Text = "";
-            this.MatrixBNInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnlyNumbers);
+            this.MatrixBNInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnlyIntNumbers);
             // 
             // GenerateB
             // 
@@ -579,7 +579,7 @@
             this.MatrixAArumentInput.Size = new System.Drawing.Size(57, 37);
             this.MatrixAArumentInput.TabIndex = 2;
             this.MatrixAArumentInput.Text = "";
-            this.MatrixAArumentInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnlyNumbers);
+            this.MatrixAArumentInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnlyIntNumbers);
             // 
             // RaiseToPowerA
             // 
@@ -644,7 +644,7 @@
             this.MatrixAMInput.Size = new System.Drawing.Size(126, 43);
             this.MatrixAMInput.TabIndex = 3;
             this.MatrixAMInput.Text = "";
-            this.MatrixAMInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnlyNumbers);
+            this.MatrixAMInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnlyIntNumbers);
             // 
             // label1
             // 
@@ -679,7 +679,7 @@
             this.MatrixANInput.Size = new System.Drawing.Size(124, 43);
             this.MatrixANInput.TabIndex = 2;
             this.MatrixANInput.Text = "";
-            this.MatrixANInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnlyNumbers);
+            this.MatrixANInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnlyIntNumbers);
             // 
             // GenerateA
             // 

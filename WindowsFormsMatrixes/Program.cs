@@ -13,7 +13,7 @@ namespace WindowsFormsMatrixes {
         static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MatricesForm());
+            Application.Run(new MainForm());
         }
     }
 }
