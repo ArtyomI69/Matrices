@@ -28,7 +28,7 @@ namespace ClassLibraryMatrices {
             B = b;
         }
 
-        public List<double> Solve() {
+        public List<double> Solution() {
             List<double> result = new List<double>();
             double mainDeterminant = A.Determinant();
             double[] determinants = CalculateDeterminants();

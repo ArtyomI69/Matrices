@@ -38,6 +38,18 @@ namespace WindowsFormsMatrixes {
             formTables.Show();
         }
 
+        private void ShowFormSoLE() {
+            SoLEForm formTables = new SoLEForm();
+            formTables.TopLevel = false;
+            formTables.Text = "";
+            formTables.ControlBox = false;
+            formTables.Dock = DockStyle.Fill;
+            // Добавляем форму таблицы как элемент управления внутрь элемента Panel
+            ControlPanel.Controls.Add(formTables);
+            formTables.BringToFront();
+            formTables.Show();
+        }
+
         private void MenuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e) {
             foreach (ToolStripMenuItem item in MenuStrip.Items) {
                 item.BackColor = SystemColors.Control;
@@ -49,6 +61,12 @@ namespace WindowsFormsMatrixes {
             if (OpenedForm == Forms.MatrixCalculator) return;
             ShowFormMatrices();
             OpenedForm = Forms.MatrixCalculator;
+        }
+
+        private void SoLETab_Click(object sender, EventArgs e) {
+            if (OpenedForm == Forms.SoLE) return;
+            ShowFormSoLE();
+            OpenedForm = Forms.SoLE;
         }
     }
 }

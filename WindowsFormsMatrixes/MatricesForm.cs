@@ -24,7 +24,7 @@ namespace WindowsFormsMatrixes {
             for (int j = 0; j < lines.Length; j++) {
                 int idx = 0;
                 string line = lines[j].TrimStart().TrimEnd();
-                if(string.IsNullOrEmpty(line)) continue;
+                if (string.IsNullOrEmpty(line)) continue;
                 for (int i = 0; i < line.Length; i++) {
                     if (line[i].ToString() != " ") {
                         curr += line[i];
@@ -331,6 +331,14 @@ namespace WindowsFormsMatrixes {
         private void InsertResultInB_Click(object sender, EventArgs e) {
             MatrixBInput.Text = MatrixOutput.Text;
             MatrixOutput.Clear();
+        }
+
+        private void Reference_Click(object sender, EventArgs e) {
+            string s = "C помощью этого калькулятора вы сможете:\n" +
+                "получить определитель матрицы, возводить её в степень,\n" +
+                "найти сумму и произведение матриц, вычислить обратную матрицу.\n" +
+                "Заполните поля для элементов матрицы и нажмите соответствующую кнопку.";
+            MessageBox.Show(s);
         }
 
         private void OnlyNumbers(object sender, KeyPressEventArgs e) {

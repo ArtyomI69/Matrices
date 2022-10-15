@@ -11,7 +11,7 @@ namespace ConsoleMatrices {
             SoLE test = new SoLE(a, b);
 
             Console.WriteLine(test);
-            List<double> solution = test.Solve();
+            List<double> solution = test.Solution();
             int N = solution.Count;
             for (int i = 0; i < N; i++) {
                 Console.WriteLine($"x{i + 1}: {solution[i]}");

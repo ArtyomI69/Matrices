@@ -57,6 +57,7 @@
             this.SoLETab.Name = "SoLETab";
             this.SoLETab.Size = new System.Drawing.Size(85, 35);
             this.SoLETab.Text = "СЛАУ";
+            this.SoLETab.Click += new System.EventHandler(this.SoLETab_Click);
             // 
             // ControlPanel
             // 
