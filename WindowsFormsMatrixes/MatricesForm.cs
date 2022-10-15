@@ -20,15 +20,14 @@ namespace WindowsFormsMatrixes {
             double[,] data = new double[N, M];
 
             string[] lines = s.Split('\n');
-            int idx = 0;
             string curr = "";
             for (int j = 0; j < lines.Length; j++) {
-                idx = 0;
-                string line = lines[j];
+                int idx = 0;
+                string line = lines[j].TrimStart().TrimEnd();
+                if(string.IsNullOrEmpty(line)) continue;
                 for (int i = 0; i < line.Length; i++) {
                     if (line[i].ToString() != " ") {
-                        if (line[i].ToString() == ".") curr += ",";
-                        else curr += line[i];
+                        curr += line[i];
                     } else {
                         if (curr.Length > 0) {
                             data[idx, j] = double.Parse(curr);
@@ -40,6 +39,7 @@ namespace WindowsFormsMatrixes {
                 if (curr.Length > 0) {
                     data[idx, j] = double.Parse(curr);
                 }
+                curr = "";
             }
 
             return new Matrix(data);
@@ -47,7 +47,7 @@ namespace WindowsFormsMatrixes {
 
         private static (int N, int M) GetMatrixSize(string s) {
             string[] lines = s.Split('\n');
-            string firstLine = lines[0];
+            string firstLine = lines[0].TrimStart().TrimEnd();
             string curr = "";
             int count = 0;
             for (int i = 0; i < firstLine.Length; i++) {
@@ -63,8 +63,8 @@ namespace WindowsFormsMatrixes {
 
             count = 0;
             for (int i = 0; i < lines.Length; i++) {
-                string line = lines[i];
-                if (!string.IsNullOrEmpty(line) && line[0].ToString() != " ") count++;
+                string line = lines[i].TrimStart().TrimEnd();
+                if (!string.IsNullOrEmpty(line)) count++;
             }
             int M = count;
             return (N, M);
@@ -286,9 +286,11 @@ namespace WindowsFormsMatrixes {
                 Matrix c = a + b;
                 MatrixOutput.Text = c.ToString();
             } catch (FormatException err) {
-                PrintErrorA("Введите матрицы в нужном формате");
+                PrintErrorA("Введите матрицы в правильном формате");
+                PrintErrorB("Введите матрицы в правильном формате");
             } catch (Exception err) {
                 PrintErrorA(err.Message);
+                PrintErrorB(err.Message);
             }
         }
 
@@ -302,9 +304,11 @@ namespace WindowsFormsMatrixes {
                 Matrix c = a - b;
                 MatrixOutput.Text = c.ToString();
             } catch (FormatException err) {
-                PrintErrorA("Введите матрицы в нужном формате");
+                PrintErrorA("Введите матрицы в правильном формате");
+                PrintErrorB("Введите матрицы в правильном формате");
             } catch (Exception err) {
                 PrintErrorA(err.Message);
+                PrintErrorB(err.Message);
             }
         }
 
@@ -317,9 +321,11 @@ namespace WindowsFormsMatrixes {
                 Matrix c = a * b;
                 MatrixOutput.Text = c.ToString();
             } catch (FormatException err) {
-                PrintErrorA("Введите матрицы в нужном формате");
+                PrintErrorA("Введите матрицы в правильном формате");
+                PrintErrorB("Введите матрицы в правильном формате");
             } catch (Exception err) {
                 PrintErrorA(err.Message);
+                PrintErrorB(err.Message);
             }
         }
 
