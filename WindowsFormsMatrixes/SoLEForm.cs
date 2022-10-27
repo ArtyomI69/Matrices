@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClassLibraryMatrices;
 
@@ -17,11 +11,21 @@ namespace WindowsFormsMatrixes {
 
         private void SoLEForm_Load(object sender, EventArgs e) {
             try {
+                // Выводим уравнение
                 SoLE input = ConvertStringToSoLE(SoLEInput.Text);
                 SoLERepresentation.Text = input.ToString();
+
+                // Решение
+                List<double> solution = input.Solution();
+                int N = solution.Count;
+                string s = "";
+                for (int i = 0; i < N; i++) {
+                    s += $"x{i + 1}: {solution[i]:0.00}";
+                    s += "\n";
+                }
+                SoLEOutput.Text = s;
             } catch {
                 SoLERepresentation.Text = "Введите систему линейных алгебраических уравнений в правильной форме (см. Справку).";
-                Solution.Enabled = false;
             }
         }
 
@@ -95,19 +99,13 @@ namespace WindowsFormsMatrixes {
         }
 
         private void SoLEInput_TextChanged(object sender, EventArgs e) {
-            Solution.Enabled = true;
+            SoLEOutput.Text = "";
             try {
+                // Выводим уравнение
                 SoLE input = ConvertStringToSoLE(SoLEInput.Text);
                 SoLERepresentation.Text = input.ToString();
-            } catch {
-                SoLERepresentation.Text = "Введите систему линейных алгебраических уравнений в правильной форме (см. Справку).";
-                Solution.Enabled = false;
-            }
-        }
 
-        private void Solution_Click(object sender, EventArgs e) {
-            try {
-                SoLE input = ConvertStringToSoLE(SoLEInput.Text);
+                // Решение
                 List<double> solution = input.Solution();
                 int N = solution.Count;
                 string s = "";
@@ -116,8 +114,8 @@ namespace WindowsFormsMatrixes {
                     s += "\n";
                 }
                 SoLEOutput.Text = s;
-            } catch (Exception err) {
-                MessageBox.Show(err.Message);
+            } catch {
+                SoLERepresentation.Text = "Введите систему линейных алгебраических уравнений в правильной форме (см. Справку).";
             }
         }
 

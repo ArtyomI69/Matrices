@@ -286,7 +286,7 @@
             // MatrixBInput
             // 
             this.MatrixBInput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MatrixBInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.MatrixBInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.MatrixBInput.Location = new System.Drawing.Point(3, 57);
             this.MatrixBInput.Name = "MatrixBInput";
             this.MatrixBInput.Size = new System.Drawing.Size(326, 215);
@@ -598,7 +598,7 @@
             // MatrixAInput
             // 
             this.MatrixAInput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MatrixAInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.MatrixAInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.MatrixAInput.Location = new System.Drawing.Point(3, 57);
             this.MatrixAInput.Name = "MatrixAInput";
             this.MatrixAInput.Size = new System.Drawing.Size(326, 215);
@@ -896,7 +896,7 @@
             // MatrixOutput
             // 
             this.MatrixOutput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MatrixOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.MatrixOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.MatrixOutput.Location = new System.Drawing.Point(3, 57);
             this.MatrixOutput.Name = "MatrixOutput";
             this.MatrixOutput.Size = new System.Drawing.Size(278, 381);
@@ -969,7 +969,7 @@
             this.tableLayoutPanel11.Name = "tableLayoutPanel11";
             this.tableLayoutPanel11.RowCount = 1;
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
             this.tableLayoutPanel11.Size = new System.Drawing.Size(1176, 56);
             this.tableLayoutPanel11.TabIndex = 6;
             // 

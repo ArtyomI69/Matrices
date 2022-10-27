@@ -34,7 +34,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.Solution = new System.Windows.Forms.Button();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
             this.SoLEOutput = new System.Windows.Forms.RichTextBox();
@@ -119,7 +118,7 @@
             // SoLEInput
             // 
             this.SoLEInput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SoLEInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.SoLEInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.SoLEInput.Location = new System.Drawing.Point(3, 64);
             this.SoLEInput.Name = "SoLEInput";
             this.SoLEInput.Size = new System.Drawing.Size(463, 192);
@@ -160,10 +159,10 @@
             // SoLERepresentation
             // 
             this.SoLERepresentation.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.SoLERepresentation.Enabled = false;
-            this.SoLERepresentation.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.SoLERepresentation.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.SoLERepresentation.Location = new System.Drawing.Point(3, 54);
             this.SoLERepresentation.Name = "SoLERepresentation";
+            this.SoLERepresentation.ReadOnly = true;
             this.SoLERepresentation.Size = new System.Drawing.Size(463, 202);
             this.SoLERepresentation.TabIndex = 1;
             this.SoLERepresentation.Text = "";
@@ -200,29 +199,16 @@
             // 
             this.tableLayoutPanel6.ColumnCount = 1;
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Controls.Add(this.Solution, 0, 1);
-            this.tableLayoutPanel6.Controls.Add(this.tableLayoutPanel7, 0, 2);
+            this.tableLayoutPanel6.Controls.Add(this.tableLayoutPanel7, 0, 1);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel6.Location = new System.Drawing.Point(61, 3);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 3;
+            this.tableLayoutPanel6.RowCount = 2;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel6.Size = new System.Drawing.Size(1052, 260);
             this.tableLayoutPanel6.TabIndex = 0;
-            // 
-            // Solution
-            // 
-            this.Solution.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Solution.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Solution.Location = new System.Drawing.Point(3, 23);
-            this.Solution.Name = "Solution";
-            this.Solution.Size = new System.Drawing.Size(1046, 42);
-            this.Solution.TabIndex = 0;
-            this.Solution.Text = "Решение";
-            this.Solution.UseVisualStyleBackColor = true;
-            this.Solution.Click += new System.EventHandler(this.Solution_Click);
             // 
             // tableLayoutPanel7
             // 
@@ -232,12 +218,12 @@
             this.tableLayoutPanel7.Controls.Add(this.label5, 0, 0);
             this.tableLayoutPanel7.Controls.Add(this.SoLEOutput, 1, 0);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 71);
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 23);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 1;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 186F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(1046, 186);
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 234F));
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(1046, 234);
             this.tableLayoutPanel7.TabIndex = 1;
             // 
             // label5
@@ -247,7 +233,7 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label5.Location = new System.Drawing.Point(3, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(98, 186);
+            this.label5.Size = new System.Drawing.Size(98, 234);
             this.label5.TabIndex = 0;
             this.label5.Text = "Ответ";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -258,7 +244,7 @@
             this.SoLEOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.SoLEOutput.Location = new System.Drawing.Point(107, 3);
             this.SoLEOutput.Name = "SoLEOutput";
-            this.SoLEOutput.Size = new System.Drawing.Size(936, 180);
+            this.SoLEOutput.Size = new System.Drawing.Size(936, 228);
             this.SoLEOutput.TabIndex = 1;
             this.SoLEOutput.Text = "";
             // 
@@ -340,7 +326,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
-        private System.Windows.Forms.Button Solution;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.RichTextBox SoLEOutput;
