@@ -30,7 +30,7 @@ namespace ClassLibraryMatrices {
         /// Создаёт квадратную матрицу размера n
         /// </summary>
         /// <param name="n">размер матрицы</param>
-        /// <param name="diagonal">если diagonal == true создаёт еденичную матрицу</param>
+        /// <param name="diagonal">если diagonal == true создаёт матрицу где значения диагонали 1</param>
         public Matrix(int n, bool diagonal = false) {
             _data = new double[n, n];
             if (!diagonal) return;
@@ -115,7 +115,7 @@ namespace ClassLibraryMatrices {
         public static Matrix operator *(Matrix a, Matrix b) {
             if (a.M != b.N) throw new Exception("Число столбцов в первом сомножителе должно быть равно числу строк во втором");
 
-            double[,] ans = new double[a.M, b.N];
+            double[,] ans = new double[b.N, a.M];
             for (int i = 0; i < b.M; i++) {
                 for (int j = 0; j < a.N; j++) {
                     for (int k = 0; k < a.M; k++) {
