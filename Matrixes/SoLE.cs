@@ -50,8 +50,8 @@ namespace ClassLibraryMatrices {
             double[] determinants = CalculateDeterminants();
 
             if (mainDeterminant == 0) {
-                if (AreDeterminantsEqualZero(determinants)) throw new Exception("The system of equaitons is undetermined");
-                else throw new Exception("The system of equations is incompatible");
+                if (AreDeterminantsEqualZero(determinants)) throw new Exception("Система уравнений не определена");
+                else throw new Exception("Система уравнений несовместима");
             }
 
             for (int i = 0; i < N; i++) {
