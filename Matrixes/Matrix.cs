@@ -15,12 +15,12 @@ namespace ClassLibraryMatrices {
         /// <summary>
         /// Кол-во столбцов матрицы
         /// </summary>
-        public int N => _data.GetUpperBound(0) + 1;
+        public int N => _data.GetLength(0);
 
         /// <summary>
         /// Кол-во рядов матрицы
         /// </summary>
-        public int M => _data.GetUpperBound(1) + 1;
+        public int M => _data.GetLength(1);
 
         public ref double this[int row, int column] => ref _data[row, column];
         #endregion
@@ -113,16 +113,17 @@ namespace ClassLibraryMatrices {
         /// <returns>новая матрица</returns>
         /// <exception cref="Exception">если число столбцов в первом сомножителе не равно числу строк во втором</exception>
         public static Matrix operator *(Matrix a, Matrix b) {
-            if (a.M != b.N) throw new Exception("Число столбцов в первом сомножителе должно быть равно числу строк во втором");
+            if (a.N != b.M) throw new Exception("Число столбцов в первом сомножителе должно быть равно числу строк во втором");
 
             double[,] ans = new double[b.N, a.M];
-            for (int i = 0; i < b.M; i++) {
-                for (int j = 0; j < a.N; j++) {
-                    for (int k = 0; k < a.M; k++) {
+            for (int i = 0; i < b.N; i++) {
+                for (int j = 0; j < a.M; j++) {
+                    for (int k = 0; k < a.N; k++) {
                         ans[i, j] += b[i, k] * a[k, j];
                     }
                 }
             }
+
             return new Matrix(ans);
         }
 
@@ -166,6 +167,8 @@ namespace ClassLibraryMatrices {
         /// <param name="b">число b</param>
         /// <returns>новая матрица</returns>
         public static Matrix operator ^(Matrix a, int b) {
+            if (!a.IsSquare()) throw new Exception("Матрица должна быть квадратной для возведения в степень");
+
             Matrix c;
             if (b == 0) {
                 c = new Matrix(a.M, true);

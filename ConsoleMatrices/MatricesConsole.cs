@@ -5,17 +5,14 @@ using ClassLibraryMatrices;
 namespace ConsoleMatrices {
     internal class MatricesConsole {
         static void Main(string[] args) {
-            Matrix a = new Matrix(3, 3, new Random());
-            Matrix b = new Matrix(1, 3, new Random());
+            Matrix a = new Matrix(3, 4, new Random());
+            Matrix b = new Matrix(4, 3, new Random());
 
-            SoLE test = new SoLE(a, b);
-
-            Console.WriteLine(test);
-            List<double> solution = test.Solution();
-            int N = solution.Count;
-            for (int i = 0; i < N; i++) {
-                Console.WriteLine($"x{i + 1}: {solution[i]}");
-            }
+            Console.WriteLine(a);
+            Console.WriteLine("------");
+            Console.WriteLine(b);
+            Console.WriteLine("------");
+            Console.WriteLine(a * b);
         }
     }
 }
