@@ -1,24 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using ClassLibraryMatrices;
+using System.Diagnostics;
 
 namespace ConsoleMatrices {
     internal class MatricesConsole {
         static void Main(string[] args) {
-            //Matrix a = new Matrix(3, 4, new Random());
-            //Matrix b = new Matrix(4, 3, new Random());
-
-            //Console.WriteLine(a);
-            //Console.WriteLine("------");
-            //Console.WriteLine(b);
-            //Console.WriteLine("------");
-            //Console.WriteLine(a * b);
-            double[,] n = { { 1, 0, 0 }, { 0, 1, 0 }, { 0, 0, 1} };
-            var a = new Matrix(n);
-            var b = new Matrix(3, true);
-            Console.WriteLine(a);
-            Console.WriteLine();
-            Console.WriteLine(b);
+            Stopwatch sw = Stopwatch.StartNew();
+            Matrix a = new Matrix(500, 500, new Random());
+            Matrix b = new Matrix(500, 500, new Random());
+            Matrix c = a * b;
+            sw.Stop();
+            Console.WriteLine(sw.ElapsedMilliseconds);
         }
     }
 }

@@ -10,15 +10,15 @@ namespace ClassLibraryMatrices {
         /// <summary>
         /// Двоичный массив, представляющий матрицу
         /// </summary>
-        private double[,] _data;
+        public double[,] _data;
 
         /// <summary>
-        /// Кол-во столбцов матрицы
+        /// Кол-во рядов матрицы
         /// </summary>
         public int N => _data.GetLength(0);
 
         /// <summary>
-        /// Кол-во рядов матрицы
+        /// Кол-во столбцов матрицы
         /// </summary>
         public int M => _data.GetLength(1);
 
@@ -73,12 +73,12 @@ namespace ClassLibraryMatrices {
         /// <returns>новая матрица</returns>
         /// <exception cref="Exception">если матрицы не равны</exception>
         public static Matrix operator +(Matrix a, Matrix b) {
-            bool isSameSize = a.N == b.N && a.M == b.M;
-            if (!isSameSize) throw new Exception("Невозможно сложить матрицы не одинаковых размеров");
+            if (!IsSameSize(a, b)) throw new Exception("Невозможно сложить матрицы не одинаковых размеров");
 
             Matrix c = new Matrix(a.N, b.M);
-            for (int j = 0; j < b.M; j++) {
-                for (int i = 0; i < a.N; i++) {
+
+            for (int i = 0; i < c.N; i++) {
+                for (int j = 0; j < c.M; j++) {
                     c[i, j] = a[i, j] + b[i, j];
                 }
             }
@@ -93,12 +93,11 @@ namespace ClassLibraryMatrices {
         /// <returns>новая матрица</returns>
         /// <exception cref="Exception">если матрицы не равны</exception>
         public static Matrix operator -(Matrix a, Matrix b) {
-            bool isSameSize = a.N == b.N && a.M == b.M;
-            if (!isSameSize) throw new Exception("Невозможно сложить матрицы не одинаковых размеров");
+            if (!IsSameSize(a, b)) throw new Exception("Невозможно сложить матрицы не одинаковых размеров");
 
             Matrix c = new Matrix(a.N, b.M);
-            for (int j = 0; j < b.M; j++) {
-                for (int i = 0; i < a.N; i++) {
+            for (int i = 0; i < c.N; i++) {
+                for (int j = 0; j < c.M; j++) {
                     c[i, j] = a[i, j] - b[i, j];
                 }
             }
@@ -113,18 +112,7 @@ namespace ClassLibraryMatrices {
         /// <returns>новая матрица</returns>
         /// <exception cref="Exception">если число столбцов в первом сомножителе не равно числу строк во втором</exception>
         public static Matrix operator *(Matrix a, Matrix b) {
-            if (a.N != b.M) throw new Exception("Число столбцов в первом сомножителе должно быть равно числу строк во втором");
-
-            double[,] ans = new double[b.N, a.M];
-            for (int i = 0; i < b.N; i++) {
-                for (int j = 0; j < a.M; j++) {
-                    for (int k = 0; k < a.N; k++) {
-                        ans[i, j] += b[i, k] * a[k, j];
-                    }
-                }
-            }
-
-            return new Matrix(ans);
+            return CoppersmithWinograd(a, b);
         }
 
         /// <summary>
@@ -136,8 +124,8 @@ namespace ClassLibraryMatrices {
         /// <exception cref="Exception">если число столбцов в первом сомножителе не равно числу строк во втором</exception>
         public static Matrix operator *(Matrix a, double b) {
             Matrix c = new Matrix(a.N, a.M);
-            for (int j = 0; j < c.M; j++) {
-                for (int i = 0; i < c.N; i++) {
+            for (int i = 0; i < c.N; i++) {
+                for (int j = 0; j < c.M; j++) {
                     c[i, j] = a[i, j] * b;
                 }
             }
@@ -151,13 +139,7 @@ namespace ClassLibraryMatrices {
         /// <param name="b">число b</param>
         /// <returns>новая матрица</returns>
         public static Matrix operator *(double b, Matrix a) {
-            Matrix c = new Matrix(a.N, a.M);
-            for (int j = 0; j < c.M; j++) {
-                for (int i = 0; i < c.N; i++) {
-                    c[i, j] = a[i, j] * b;
-                }
-            }
-            return c;
+            return a * b;
         }
 
         /// <summary>
@@ -166,34 +148,245 @@ namespace ClassLibraryMatrices {
         /// <param name="a">матрица a</param>
         /// <param name="b">число b</param>
         /// <returns>новая матрица</returns>
-        public static Matrix operator ^(Matrix a, int b) {
-            if (!a.IsSquare()) throw new Exception("Матрица должна быть квадратной для возведения в степень");
-
-            Matrix c;
-            if (b == 0) {
-                c = new Matrix(a.M, true);
-                return c;
-            }
-
-            c = (Matrix)a.Clone();
-            if (b < 0) c = c.Inverse();
-            int n = Math.Abs(b);
-            for (int i = 1; i < n; i++) {
-                c *= c;
-            }
-            return c;
+        public static Matrix operator ^(Matrix matrix, int power) {
+            return MatrixExponentiation(matrix, power);
         }
         #endregion
 
-        #region Public Методы
+        #region Умножение
         /// <summary>
-        /// Проверяем квадратная ли матрица
+        /// Стандартный способ умножения матрицы
         /// </summary>
-        /// <returns>True - матрица квадратная, false - матрица не квадратная</returns>
-        public bool IsSquare() {
-            return M == N;
+        /// <param name="a">матрица a</param>
+        /// <param name="b">матрица b</param>
+        /// <returns>результат умножения матриц a и b</returns>
+        /// <exception cref="Exception">Если число столбцов в первом сомножителе не равно числу строк во втором</exception>
+        public static Matrix MultiplyMatrices(Matrix a, Matrix b) {
+            if (a.M != b.N) throw new Exception("Число столбцов в первом сомножителе должно быть равно числу строк во втором");
+
+            Matrix c = new Matrix(a.N, b.M);
+            for (int i = 0; i < a.N; i++) {
+                for (int j = 0; j < b.M; j++) {
+                    for (int k = 0; k < b.N; k++) {
+                        c[i, j] += a[i, k] * b[k, j];
+                    }
+                }
+            }
+
+            return c;
         }
 
+        /// <summary>
+        /// Умножения матрицы методом Копперсмита-Винограда
+        /// </summary>
+        /// <param name="a">матрица a</param>
+        /// <param name="b">матрица b</param>
+        /// <returns>результат умножения матриц a и b</returns>
+        /// <exception cref="Exception">Если число столбцов в первом сомножителе не равно числу строк во втором</exception>
+        public static Matrix CoppersmithWinograd(Matrix matrix1, Matrix matrix2) {
+            int rows1 = matrix1.N;
+            int cols1 = matrix1.M;
+            int rows2 = matrix2.N;
+            int cols2 = matrix2.M;
+
+            if (cols1 != rows2)
+                throw new Exception("Число столбцов в первом сомножителе должно быть равно числу строк во втором");
+
+            double[] rowFactor = new double[rows1];
+            double[] colFactor = new double[cols2];
+
+            for (int i = 0; i < rows1; i++) {
+                for (int j = 0; j < cols1 / 2; j++) {
+                    rowFactor[i] += matrix1[i, j * 2] * matrix1[i, j * 2 + 1];
+                }
+            }
+
+            for (int i = 0; i < cols2; i++) {
+                for (int j = 0; j < rows2 / 2; j++) {
+                    colFactor[i] += matrix2[j * 2, i] * matrix2[j * 2 + 1, i];
+                }
+            }
+
+            double[,] result = new double[rows1, cols2];
+
+            for (int i = 0; i < rows1; i++) {
+                for (int j = 0; j < cols2; j++) {
+                    result[i, j] = -rowFactor[i] - colFactor[j];
+
+                    for (int k = 0; k < cols1 / 2; k++) {
+                        result[i, j] += (matrix1[i, 2 * k + 1] + matrix2[2 * k, j]) * (matrix1[i, 2 * k] + matrix2[2 * k + 1, j]);
+                    }
+                }
+            }
+
+            if (cols1 % 2 == 1) {
+                for (int i = 0; i < rows1; i++) {
+                    for (int j = 0; j < cols2; j++) {
+                        result[i, j] += matrix1[i, cols1 - 1] * matrix2[rows2 - 1, j];
+                    }
+                }
+            }
+
+            return new Matrix(result);
+        }
+        #endregion
+
+        #region Возведение в степень
+        /// <summary>
+        /// Стандартный способ возведение матрицы
+        /// </summary>
+        /// <param name="matrix">матрица возводимая в степень</param>
+        /// <param name="power">аргуемент степени</param>
+        /// <returns>результат возведения матрицы в степень</returns>
+        /// <exception cref="Exception">Если матрица не квадратная</exception>
+        public static Matrix MatrixExponentiation(Matrix matrix, int power) {
+            if (!matrix.IsSquare()) throw new Exception("Матрица должна быть квадратной для возведения в степень");
+            if (power < 0) {
+                matrix = matrix.Inverse();
+                power = Math.Abs(power);
+            }
+
+            if (power == 0) return new Matrix(matrix.M, true);
+
+            Matrix res = (Matrix)matrix.Clone();
+            for (int i = 1; i < power; i++) {
+                res *= matrix;
+            }
+            return res;
+        }
+
+        /// <summary>
+        /// Быстрый метод возведения матрицы в степень
+        /// </summary>
+        /// <param name="matrix">матрица возводимая в степень</param>
+        /// <param name="power">аргуемент степени</param>
+        /// <returns>результат возведения матрицы в степень</returns>
+        /// <exception cref="Exception">Если матрица не квадратная</exception>
+        public static Matrix FastMatrixExponentiation(Matrix matrix, int power) {
+            if (!matrix.IsSquare()) throw new Exception("Матрица должна быть квадратной для возведения в степень");
+            if (power < 0) {
+                matrix = matrix.Inverse();
+                power = Math.Abs(power);
+            }
+
+            if (power == 0) {
+                // Возврат единичной матрицы
+                int size = matrix.N;
+                Matrix result = new Matrix(size, true);
+                return result;
+            } else if (power % 2 == 0) {
+                // Возврат квадрата матрицы, возведенной в степень power / 2
+                Matrix halfPowerMatrix = FastMatrixExponentiation(matrix, power / 2);
+                return MultiplyMatrices(halfPowerMatrix, halfPowerMatrix);
+            } else {
+                // Возврат произведения матрицы и матрицы, возведенной в степень power - 1
+                Matrix halfPowerMatrix = FastMatrixExponentiation(matrix, (power - 1) / 2);
+                Matrix squaredHalfPowerMatrix = MultiplyMatrices(halfPowerMatrix, halfPowerMatrix);
+                return MultiplyMatrices(matrix, squaredHalfPowerMatrix);
+            }
+        }
+        #endregion
+
+        #region Обратная матрица
+        /// <summary>
+        /// Получения обратной матрицы методом Гаусса
+        /// </summary>
+        /// <returns>Обратная матрица</returns>
+        /// <exception cref="Exception">Есши матрица не квадратная</exception>
+        public Matrix Inverse() {
+            if (!IsSquare()) throw new Exception("Матрица должна быть квадратной для возведения в степень");
+
+            double[,] augmentedMatrix = new double[N, 2 * N];
+
+            // Создаём расширенную матрицу
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < N; j++) {
+                    augmentedMatrix[i, j] = _data[i, j];
+                }
+                augmentedMatrix[i, i + N] = 1;
+            }
+
+            // Выполняем операции со строками, чтобы получить единичную матрицу слева.
+            for (int i = 0; i < N; i++) {
+                // Divide the current row by the pivot element
+                double pivot = augmentedMatrix[i, i];
+                for (int j = i; j < 2 * N; j++) {
+                    augmentedMatrix[i, j] /= pivot;
+                }
+
+                // Вычитаем текущую строку из всех других строк, чтобы получить нули ниже точки поворота.
+                for (int j = 0; j < N; j++) {
+                    if (j != i) {
+                        double factor = augmentedMatrix[j, i];
+                        for (int k = i; k < 2 * N; k++) {
+                            augmentedMatrix[j, k] -= factor * augmentedMatrix[i, k];
+                        }
+                    }
+                }
+            }
+
+            // Извликаем обратную матрицу из расширенной матрицы
+            double[,] inverseMatrix = new double[N, N];
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < N; j++) {
+                    inverseMatrix[i, j] = augmentedMatrix[i, j + N];
+                }
+            }
+
+            return new Matrix(inverseMatrix);
+        }
+        #endregion
+
+        #region Определитель
+        /// <summary>
+        /// Нахождение определителя по методу Гаусса
+        /// </summary>
+        /// <returns>определитель</returns>
+        /// <exception cref="Exception">если матрица не квадратная</exception>
+        public double Determinant() {
+            double sign = 1;
+            Matrix copyMatrix = (Matrix)Clone();
+
+            for (int i = 0; i < N; i++) {
+                int maxRow = i;
+
+                for (int j = i + 1; j < N; j++) {
+                    if (Math.Abs(copyMatrix[j, i]) > Math.Abs(copyMatrix[maxRow, i])) {
+                        maxRow = j;
+                    }
+                }
+
+                if (maxRow != i) {
+                    for (int j = 0; j < N; j++) {
+                        double temp = copyMatrix[i, j];
+                        copyMatrix[i, j] = copyMatrix[maxRow, j];
+                        copyMatrix[maxRow, j] = temp;
+                    }
+                    sign *= -1;
+                }
+
+                for (int j = i + 1; j < N; j++) {
+                    double factor = copyMatrix[j, i] / copyMatrix[i, i];
+
+                    for (int k = i + 1; k < N; k++) {
+                        copyMatrix[j, k] -= factor * copyMatrix[i, k];
+                    }
+
+                    copyMatrix[j, i] = 0;
+                }
+            }
+
+            double determinant = sign;
+
+            for (int i = 0; i < N; i++) {
+                determinant *= copyMatrix[i, i];
+            }
+
+            return determinant;
+        }
+        #endregion
+
+        #region Вспомогательные методы
         /// <summary>
         /// Транспонирование матрицы
         /// </summary>
@@ -209,27 +402,21 @@ namespace ClassLibraryMatrices {
         }
 
         /// <summary>
-        /// Нахождение определителя
+        /// Проверяем квадратная ли матрица
         /// </summary>
-        /// <returns>определитель</returns>
-        /// <exception cref="Exception">если матрица не квадратная</exception>
-        public double Determinant() {
-            if (!IsSquare()) throw new Exception("Матрица должна быть квадратной для нахождения определителя");
-            return CalculateDeterminant(this);
+        /// <returns>True - матрица квадратная, false - матрица не квадратная</returns>
+        public bool IsSquare() {
+            return N == M;
         }
 
         /// <summary>
-        /// Нахождение обратной матрицу
+        /// Проверяем одинаковы ли матрицы по размерам
         /// </summary>
-        /// <returns>новая матрица</returns>
-        /// <exception cref="Exception">если матрица не квадратная</exception>
-        public Matrix Inverse() {
-            if (!IsSquare()) throw new Exception("Для приведения матрицы к обратной матрица должна быть квадратной");
-
-            if (Math.Abs(Determinant()) <= 0.000000001) throw new ArgumentException("Обратная матрица не существует!");
-            double k = 1 / Determinant();
-            Matrix minorMatrix = MinorMatrix();
-            return minorMatrix.Transpose() * k;
+        /// <param name="a">матрица a</param>
+        /// <param name="b">матрица b</param>
+        /// <returns>True - матрицы одинаковы по размерам, false - иначе</returns>
+        public static bool IsSameSize(Matrix a, Matrix b) {
+            return a.N == b.N && a.M == b.M;
         }
 
         /// <summary>
@@ -238,9 +425,9 @@ namespace ClassLibraryMatrices {
         /// <returns>строчный вид матрицы</returns>
         public override string ToString() {
             string s = "";
-            for (int j = 0; j < M; j++) {
-                for (int i = 0; i < N; i++) {
-                    s += ($"{_data[i, j]:0.00}  ");
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < M; j++) {
+                    s += ($"{_data[i, j]:0.00} ");
                 }
                 s += ("\n");
             }
@@ -253,62 +440,6 @@ namespace ClassLibraryMatrices {
         /// <returns>новая матрица</returns>
         public object Clone() {
             return new Matrix((double[,])_data.Clone());
-        }
-        #endregion
-
-        #region Private Методы
-        /// <summary>
-        /// Рекурсивный способ нахождение определителя (взято из интернета)
-        /// </summary>
-        /// <returns>Определитель</returns>
-        private double CalculateDeterminant(Matrix m) {
-            if (m.N == 1) return m[0, 0];
-
-            double det = 0;
-            int length = m.M;
-
-            if (length == 1) det = m._data[0, 0];
-            if (length == 2) det = m._data[0, 0] * m._data[1, 1] - m._data[0, 1] * m._data[1, 0];
-
-            if (length > 2)
-                for (int i = 0; i < m.N; i++)
-                    det += Math.Pow(-1, 0 + i) * m._data[0, i] * CalculateDeterminant(m.GetMinor(0, i));
-            return det;
-        }
-
-        /// <summary>
-        /// Получение минора матрицы.
-        /// </summary>
-        /// <param name="row"> индекс строки </param>
-        /// <param name="column"> индекс столбца </param>
-        /// <returns> минор матрицы </returns>
-        private Matrix GetMinor(int row, int column) {
-            double[,] minor = new double[M - 1, N - 1];
-            for (int i = 0; i < M; i++) {
-                for (int j = 0; j < N; j++) {
-                    if ((i != row) || (j != column)) {
-                        if (i > row && j < column) minor[i - 1, j] = _data[i, j];
-                        if (i < row && j > column) minor[i, j - 1] = _data[i, j];
-                        if (i > row && j > column) minor[i - 1, j - 1] = _data[i, j];
-                        if (i < row && j < column) minor[i, j] = _data[i, j];
-                    }
-                }
-            }
-            return new Matrix(minor);
-        }
-
-        /// <summary>
-        /// Поиск матрицы миноров (алгебраических дополнений)
-        /// </summary>
-        /// <returns> матрица миноров </returns>
-        public Matrix MinorMatrix() {
-            double[,] ans = new double[M, N];
-
-            for (int i = 0; i < M; i++)
-                for (int j = 0; j < N; j++)
-                    ans[i, j] = Math.Pow(-1, i + j) * CalculateDeterminant(GetMinor(i, j));
-
-            return new Matrix(ans);
         }
         #endregion
     }

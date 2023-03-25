@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClassLibraryMatrices;
@@ -15,61 +16,34 @@ namespace WindowsFormsMatrixes {
             InitializeComponent();
         }
 
+        #region Конвертация текста в матрицу
         private static Matrix ConvertStringToMatrix(string s) {
+            string input = Regex.Replace(s, @"^\s*$\n|\r", string.Empty, RegexOptions.Multiline).TrimEnd();
             (int N, int M) = GetMatrixSize(s);
-            double[,] data = new double[N, M];
 
-            string[] lines = s.Split('\n');
-            string curr = "";
-            for (int j = 0; j < lines.Length; j++) {
-                int idx = 0;
-                string line = lines[j].TrimStart().TrimEnd();
-                if (string.IsNullOrEmpty(line)) continue;
-                for (int i = 0; i < line.Length; i++) {
-                    if (line[i].ToString() != " ") {
-                        curr += line[i];
-                    } else {
-                        if (curr.Length > 0) {
-                            data[idx, j] = double.Parse(curr);
-                            idx++;
-                        }
-                        curr = "";
-                    }
+            double[,] adjMatrix = new double[N, M];
+            int i = 0, j = 0;
+            foreach (string line in input.Split('\n')) {
+                foreach (string el in line.Trim().Split(' ')) {
+                    adjMatrix[i, j] = double.Parse(el);
+                    j++;
                 }
-                if (curr.Length > 0) {
-                    data[idx, j] = double.Parse(curr);
-                }
-                curr = "";
+                j = 0;
+                i++;
             }
 
-            return new Matrix(data);
+            return new Matrix(adjMatrix);
         }
 
         private static (int N, int M) GetMatrixSize(string s) {
-            string[] lines = s.Split('\n');
-            string firstLine = lines[0].TrimStart().TrimEnd();
-            string curr = "";
-            int count = 0;
-            for (int i = 0; i < firstLine.Length; i++) {
-                if (firstLine[i].ToString() != " ") {
-                    curr += firstLine[i].ToString();
-                } else {
-                    if (curr.Length > 0) count++;
-                    curr = "";
-                }
-            }
-            if (curr.Length > 0) count++;
-            int N = count;
-
-            count = 0;
-            for (int i = 0; i < lines.Length; i++) {
-                string line = lines[i].TrimStart().TrimEnd();
-                if (!string.IsNullOrEmpty(line)) count++;
-            }
-            int M = count;
+            string input = Regex.Replace(s, @"^\s*$\n|\r", string.Empty, RegexOptions.Multiline).TrimEnd();
+            int N = input.Split('\n').Length;
+            int M = input.Split('\n')[0].Trim().Split(' ').Length;
             return (N, M);
         }
+        #endregion
 
+        #region МатрицаA
         private void PrintErrorA(string message) {
             ErrorA.Text = message;
         }
@@ -89,12 +63,8 @@ namespace WindowsFormsMatrixes {
         private void GenerateA_Click(object sender, EventArgs e) {
             ClearErrorA();
             try {
-                int N = int.Parse(MatrixANInput.Text);
-                int M = int.Parse(MatrixAMInput.Text);
-                if (N < 0 || M < 0) {
-                    N = Math.Abs(N);
-                    M = Math.Abs(M);
-                }
+                int N = Math.Abs(int.Parse(MatrixANInput.Text));
+                int M = Math.Abs(int.Parse(MatrixAMInput.Text));
                 MatrixANInput.Text = N.ToString();
                 MatrixAMInput.Text = M.ToString();
                 Matrix newMatrix = new Matrix(N, M, new Random());
@@ -173,16 +143,14 @@ namespace WindowsFormsMatrixes {
                 PrintErrorA(err.Message);
             }
         }
+        #endregion
 
+        #region МатрицаB
         private void GenerateB_Click(object sender, EventArgs e) {
             ClearErrorB();
             try {
-                int N = int.Parse(MatrixBNInput.Text);
-                int M = int.Parse(MatrixBMInput.Text);
-                if (N < 0 || M < 0) {
-                    N = Math.Abs(N);
-                    M = Math.Abs(M);
-                }
+                int N = Math.Abs(int.Parse(MatrixBNInput.Text));
+                int M = Math.Abs(int.Parse(MatrixBMInput.Text));
                 MatrixBNInput.Text = N.ToString();
                 MatrixBMInput.Text = M.ToString();
                 Matrix newMatrix = new Matrix(N, M, new Random());
@@ -261,6 +229,16 @@ namespace WindowsFormsMatrixes {
                 PrintErrorB(err.Message);
             }
         }
+        #endregion
+
+        #region Операции между матрицами A и B
+        private void FromRightToLeft_Click(object sender, EventArgs e) {
+            MatrixAInput.Text = MatrixBInput.Text;
+        }
+
+        private void FromLeftToRight_Click(object sender, EventArgs e) {
+            MatrixBInput.Text = MatrixAInput.Text;
+        }
 
         private void Swap_Click(object sender, EventArgs e) {
             string tmp = ErrorA.Text;
@@ -288,7 +266,7 @@ namespace WindowsFormsMatrixes {
             }
         }
 
-        private void Substraction_Click(object sender, EventArgs e) {
+        private void Subtraction_Click(object sender, EventArgs e) {
             ClearErrorA();
             ClearErrorB();
             try {
@@ -322,7 +300,9 @@ namespace WindowsFormsMatrixes {
                 PrintErrorB(err.Message);
             }
         }
+        #endregion
 
+        #region Вспомогательные кнопки
         private void InsertResultInA_Click(object sender, EventArgs e) {
             MatrixAInput.Text = MatrixOutput.Text;
             MatrixOutput.Clear();
@@ -345,7 +325,9 @@ namespace WindowsFormsMatrixes {
             s += "Через пробел.";
             MessageBox.Show(s);
         }
+        #endregion
 
+        #region Проверка введённого текста
         private void OnlyNumbers(object sender, KeyPressEventArgs e) {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ',') && (e.KeyChar != ' ') && (e.KeyChar != '-')) {
                 e.Handled = true;
@@ -357,5 +339,6 @@ namespace WindowsFormsMatrixes {
                 e.Handled = true;
             }
         }
+        #endregion
     }
 }

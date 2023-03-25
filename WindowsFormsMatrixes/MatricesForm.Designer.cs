@@ -88,6 +88,8 @@
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.Reference = new System.Windows.Forms.Button();
+            this.FromRightToLeft = new System.Windows.Forms.Button();
+            this.FromLeftToRight = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.TableLayout33.SuspendLayout();
@@ -167,13 +169,13 @@
             this.TableLayout33.Name = "TableLayout33";
             this.TableLayout33.RowCount = 8;
             this.TableLayout33.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.TableLayout33.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.TableLayout33.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.TableLayout33.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.TableLayout33.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.TableLayout33.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.TableLayout33.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.TableLayout33.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.TableLayout33.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.TableLayout33.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
+            this.TableLayout33.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
+            this.TableLayout33.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
+            this.TableLayout33.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
+            this.TableLayout33.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
             this.TableLayout33.Size = new System.Drawing.Size(332, 554);
             this.TableLayout33.TabIndex = 5;
             // 
@@ -185,12 +187,12 @@
             this.tableLayoutPanel12.Controls.Add(this.InverseB, 0, 0);
             this.tableLayoutPanel12.Controls.Add(this.DeterminantB, 0, 0);
             this.tableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel12.Location = new System.Drawing.Point(3, 498);
+            this.tableLayoutPanel12.Location = new System.Drawing.Point(3, 502);
             this.tableLayoutPanel12.Name = "tableLayoutPanel12";
             this.tableLayoutPanel12.RowCount = 1;
             this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 53F));
-            this.tableLayoutPanel12.Size = new System.Drawing.Size(326, 53);
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
+            this.tableLayoutPanel12.Size = new System.Drawing.Size(326, 49);
             this.tableLayoutPanel12.TabIndex = 5;
             // 
             // InverseB
@@ -199,7 +201,7 @@
             this.InverseB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.InverseB.Location = new System.Drawing.Point(166, 3);
             this.InverseB.Name = "InverseB";
-            this.InverseB.Size = new System.Drawing.Size(157, 47);
+            this.InverseB.Size = new System.Drawing.Size(157, 43);
             this.InverseB.TabIndex = 2;
             this.InverseB.Text = "Обратная матрица";
             this.InverseB.UseVisualStyleBackColor = true;
@@ -211,7 +213,7 @@
             this.DeterminantB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.DeterminantB.Location = new System.Drawing.Point(3, 3);
             this.DeterminantB.Name = "DeterminantB";
-            this.DeterminantB.Size = new System.Drawing.Size(157, 47);
+            this.DeterminantB.Size = new System.Drawing.Size(157, 43);
             this.DeterminantB.TabIndex = 1;
             this.DeterminantB.Text = "Определитель";
             this.DeterminantB.UseVisualStyleBackColor = true;
@@ -225,12 +227,12 @@
             this.tableLayoutPanel13.Controls.Add(this.tableLayoutPanel14, 0, 0);
             this.tableLayoutPanel13.Controls.Add(this.TransponeB, 0, 0);
             this.tableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel13.Location = new System.Drawing.Point(3, 443);
+            this.tableLayoutPanel13.Location = new System.Drawing.Point(3, 453);
             this.tableLayoutPanel13.Name = "tableLayoutPanel13";
             this.tableLayoutPanel13.RowCount = 1;
             this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
-            this.tableLayoutPanel13.Size = new System.Drawing.Size(326, 49);
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 43F));
+            this.tableLayoutPanel13.Size = new System.Drawing.Size(326, 43);
             this.tableLayoutPanel13.TabIndex = 4;
             // 
             // tableLayoutPanel14
@@ -245,7 +247,7 @@
             this.tableLayoutPanel14.Name = "tableLayoutPanel14";
             this.tableLayoutPanel14.RowCount = 1;
             this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel14.Size = new System.Drawing.Size(157, 43);
+            this.tableLayoutPanel14.Size = new System.Drawing.Size(157, 37);
             this.tableLayoutPanel14.TabIndex = 2;
             // 
             // MatrixBArumentInput
@@ -254,7 +256,7 @@
             this.MatrixBArumentInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.MatrixBArumentInput.Location = new System.Drawing.Point(97, 3);
             this.MatrixBArumentInput.Name = "MatrixBArumentInput";
-            this.MatrixBArumentInput.Size = new System.Drawing.Size(57, 37);
+            this.MatrixBArumentInput.Size = new System.Drawing.Size(57, 31);
             this.MatrixBArumentInput.TabIndex = 2;
             this.MatrixBArumentInput.Text = "";
             this.MatrixBArumentInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnlyIntNumbers);
@@ -265,7 +267,7 @@
             this.RaiseToPowerB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.RaiseToPowerB.Location = new System.Drawing.Point(3, 3);
             this.RaiseToPowerB.Name = "RaiseToPowerB";
-            this.RaiseToPowerB.Size = new System.Drawing.Size(88, 37);
+            this.RaiseToPowerB.Size = new System.Drawing.Size(88, 31);
             this.RaiseToPowerB.TabIndex = 1;
             this.RaiseToPowerB.Text = "Возвести в";
             this.RaiseToPowerB.UseVisualStyleBackColor = true;
@@ -277,7 +279,7 @@
             this.TransponeB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.TransponeB.Location = new System.Drawing.Point(3, 3);
             this.TransponeB.Name = "TransponeB";
-            this.TransponeB.Size = new System.Drawing.Size(157, 43);
+            this.TransponeB.Size = new System.Drawing.Size(157, 37);
             this.TransponeB.TabIndex = 1;
             this.TransponeB.Text = "Транспонировать";
             this.TransponeB.UseVisualStyleBackColor = true;
@@ -286,8 +288,8 @@
             // MatrixBInput
             // 
             this.MatrixBInput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MatrixBInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.MatrixBInput.Location = new System.Drawing.Point(3, 57);
+            this.MatrixBInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.MatrixBInput.Location = new System.Drawing.Point(3, 85);
             this.MatrixBInput.Name = "MatrixBInput";
             this.MatrixBInput.Size = new System.Drawing.Size(326, 215);
             this.MatrixBInput.TabIndex = 0;
@@ -306,11 +308,11 @@
             this.tableLayoutPanel15.Controls.Add(this.label6, 2, 0);
             this.tableLayoutPanel15.Controls.Add(this.MatrixBNInput, 1, 0);
             this.tableLayoutPanel15.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel15.Location = new System.Drawing.Point(3, 278);
+            this.tableLayoutPanel15.Location = new System.Drawing.Point(3, 306);
             this.tableLayoutPanel15.Name = "tableLayoutPanel15";
             this.tableLayoutPanel15.RowCount = 1;
             this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel15.Size = new System.Drawing.Size(326, 49);
+            this.tableLayoutPanel15.Size = new System.Drawing.Size(326, 43);
             this.tableLayoutPanel15.TabIndex = 1;
             // 
             // MatrixBMInput
@@ -319,7 +321,7 @@
             this.MatrixBMInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.MatrixBMInput.Location = new System.Drawing.Point(197, 3);
             this.MatrixBMInput.Name = "MatrixBMInput";
-            this.MatrixBMInput.Size = new System.Drawing.Size(126, 43);
+            this.MatrixBMInput.Size = new System.Drawing.Size(126, 37);
             this.MatrixBMInput.TabIndex = 3;
             this.MatrixBMInput.Text = "";
             this.MatrixBMInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnlyIntNumbers);
@@ -331,7 +333,7 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label5.Location = new System.Drawing.Point(3, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(26, 49);
+            this.label5.Size = new System.Drawing.Size(26, 43);
             this.label5.TabIndex = 0;
             this.label5.Text = "N";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -343,7 +345,7 @@
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label6.Location = new System.Drawing.Point(165, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(26, 49);
+            this.label6.Size = new System.Drawing.Size(26, 43);
             this.label6.TabIndex = 1;
             this.label6.Text = "M";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -354,7 +356,7 @@
             this.MatrixBNInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.MatrixBNInput.Location = new System.Drawing.Point(35, 3);
             this.MatrixBNInput.Name = "MatrixBNInput";
-            this.MatrixBNInput.Size = new System.Drawing.Size(124, 43);
+            this.MatrixBNInput.Size = new System.Drawing.Size(124, 37);
             this.MatrixBNInput.TabIndex = 2;
             this.MatrixBNInput.Text = "";
             this.MatrixBNInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnlyIntNumbers);
@@ -363,9 +365,9 @@
             // 
             this.GenerateB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GenerateB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.GenerateB.Location = new System.Drawing.Point(3, 333);
+            this.GenerateB.Location = new System.Drawing.Point(3, 355);
             this.GenerateB.Name = "GenerateB";
-            this.GenerateB.Size = new System.Drawing.Size(326, 49);
+            this.GenerateB.Size = new System.Drawing.Size(326, 43);
             this.GenerateB.TabIndex = 2;
             this.GenerateB.Text = "Сгенерировать";
             this.GenerateB.UseVisualStyleBackColor = true;
@@ -379,12 +381,12 @@
             this.tableLayoutPanel16.Controls.Add(this.tableLayoutPanel17, 0, 0);
             this.tableLayoutPanel16.Controls.Add(this.ClearB, 0, 0);
             this.tableLayoutPanel16.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel16.Location = new System.Drawing.Point(3, 388);
+            this.tableLayoutPanel16.Location = new System.Drawing.Point(3, 404);
             this.tableLayoutPanel16.Name = "tableLayoutPanel16";
             this.tableLayoutPanel16.RowCount = 1;
             this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
-            this.tableLayoutPanel16.Size = new System.Drawing.Size(326, 49);
+            this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 43F));
+            this.tableLayoutPanel16.Size = new System.Drawing.Size(326, 43);
             this.tableLayoutPanel16.TabIndex = 6;
             // 
             // tableLayoutPanel17
@@ -399,7 +401,7 @@
             this.tableLayoutPanel17.Name = "tableLayoutPanel17";
             this.tableLayoutPanel17.RowCount = 1;
             this.tableLayoutPanel17.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel17.Size = new System.Drawing.Size(157, 43);
+            this.tableLayoutPanel17.Size = new System.Drawing.Size(157, 37);
             this.tableLayoutPanel17.TabIndex = 3;
             // 
             // MultiplyB
@@ -408,7 +410,7 @@
             this.MultiplyB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.MultiplyB.Location = new System.Drawing.Point(3, 3);
             this.MultiplyB.Name = "MultiplyB";
-            this.MultiplyB.Size = new System.Drawing.Size(88, 37);
+            this.MultiplyB.Size = new System.Drawing.Size(88, 31);
             this.MultiplyB.TabIndex = 0;
             this.MultiplyB.Text = "Умножить";
             this.MultiplyB.UseVisualStyleBackColor = true;
@@ -420,7 +422,7 @@
             this.MatrixBMultiplierInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.MatrixBMultiplierInput.Location = new System.Drawing.Point(97, 3);
             this.MatrixBMultiplierInput.Name = "MatrixBMultiplierInput";
-            this.MatrixBMultiplierInput.Size = new System.Drawing.Size(57, 37);
+            this.MatrixBMultiplierInput.Size = new System.Drawing.Size(57, 31);
             this.MatrixBMultiplierInput.TabIndex = 1;
             this.MatrixBMultiplierInput.Text = "";
             this.MatrixBMultiplierInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnlyNumbers);
@@ -431,7 +433,7 @@
             this.ClearB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ClearB.Location = new System.Drawing.Point(3, 3);
             this.ClearB.Name = "ClearB";
-            this.ClearB.Size = new System.Drawing.Size(157, 43);
+            this.ClearB.Size = new System.Drawing.Size(157, 37);
             this.ClearB.TabIndex = 0;
             this.ClearB.Text = "Очистить";
             this.ClearB.UseVisualStyleBackColor = true;
@@ -458,7 +460,7 @@
             this.ErrorB.ForeColor = System.Drawing.Color.Red;
             this.ErrorB.Location = new System.Drawing.Point(3, 27);
             this.ErrorB.Name = "ErrorB";
-            this.ErrorB.Size = new System.Drawing.Size(326, 27);
+            this.ErrorB.Size = new System.Drawing.Size(326, 55);
             this.ErrorB.TabIndex = 8;
             this.ErrorB.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -479,13 +481,13 @@
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 8;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(332, 554);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
@@ -497,12 +499,12 @@
             this.tableLayoutPanel6.Controls.Add(this.InverseA, 0, 0);
             this.tableLayoutPanel6.Controls.Add(this.DeterminantA, 0, 0);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 498);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 502);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 1;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 53F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(326, 53);
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(326, 49);
             this.tableLayoutPanel6.TabIndex = 5;
             // 
             // InverseA
@@ -511,7 +513,7 @@
             this.InverseA.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.InverseA.Location = new System.Drawing.Point(166, 3);
             this.InverseA.Name = "InverseA";
-            this.InverseA.Size = new System.Drawing.Size(157, 47);
+            this.InverseA.Size = new System.Drawing.Size(157, 43);
             this.InverseA.TabIndex = 2;
             this.InverseA.Text = "Обратная матрица";
             this.InverseA.UseVisualStyleBackColor = true;
@@ -523,7 +525,7 @@
             this.DeterminantA.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.DeterminantA.Location = new System.Drawing.Point(3, 3);
             this.DeterminantA.Name = "DeterminantA";
-            this.DeterminantA.Size = new System.Drawing.Size(157, 47);
+            this.DeterminantA.Size = new System.Drawing.Size(157, 43);
             this.DeterminantA.TabIndex = 1;
             this.DeterminantA.Text = "Определитель";
             this.DeterminantA.UseVisualStyleBackColor = true;
@@ -537,12 +539,12 @@
             this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel9, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.TransponeA, 0, 0);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 443);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 453);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(326, 49);
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 43F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(326, 43);
             this.tableLayoutPanel5.TabIndex = 4;
             // 
             // tableLayoutPanel9
@@ -557,7 +559,7 @@
             this.tableLayoutPanel9.Name = "tableLayoutPanel9";
             this.tableLayoutPanel9.RowCount = 1;
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(157, 43);
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(157, 37);
             this.tableLayoutPanel9.TabIndex = 2;
             // 
             // MatrixAArumentInput
@@ -566,7 +568,7 @@
             this.MatrixAArumentInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.MatrixAArumentInput.Location = new System.Drawing.Point(97, 3);
             this.MatrixAArumentInput.Name = "MatrixAArumentInput";
-            this.MatrixAArumentInput.Size = new System.Drawing.Size(57, 37);
+            this.MatrixAArumentInput.Size = new System.Drawing.Size(57, 31);
             this.MatrixAArumentInput.TabIndex = 2;
             this.MatrixAArumentInput.Text = "";
             this.MatrixAArumentInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnlyIntNumbers);
@@ -577,7 +579,7 @@
             this.RaiseToPowerA.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.RaiseToPowerA.Location = new System.Drawing.Point(3, 3);
             this.RaiseToPowerA.Name = "RaiseToPowerA";
-            this.RaiseToPowerA.Size = new System.Drawing.Size(88, 37);
+            this.RaiseToPowerA.Size = new System.Drawing.Size(88, 31);
             this.RaiseToPowerA.TabIndex = 1;
             this.RaiseToPowerA.Text = "Возвести в";
             this.RaiseToPowerA.UseVisualStyleBackColor = true;
@@ -589,7 +591,7 @@
             this.TransponeA.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.TransponeA.Location = new System.Drawing.Point(3, 3);
             this.TransponeA.Name = "TransponeA";
-            this.TransponeA.Size = new System.Drawing.Size(157, 43);
+            this.TransponeA.Size = new System.Drawing.Size(157, 37);
             this.TransponeA.TabIndex = 1;
             this.TransponeA.Text = "Транспонировать";
             this.TransponeA.UseVisualStyleBackColor = true;
@@ -599,7 +601,7 @@
             // 
             this.MatrixAInput.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MatrixAInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.MatrixAInput.Location = new System.Drawing.Point(3, 57);
+            this.MatrixAInput.Location = new System.Drawing.Point(3, 85);
             this.MatrixAInput.Name = "MatrixAInput";
             this.MatrixAInput.Size = new System.Drawing.Size(326, 215);
             this.MatrixAInput.TabIndex = 0;
@@ -618,11 +620,11 @@
             this.tableLayoutPanel4.Controls.Add(this.label2, 2, 0);
             this.tableLayoutPanel4.Controls.Add(this.MatrixANInput, 1, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 278);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 306);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(326, 49);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(326, 43);
             this.tableLayoutPanel4.TabIndex = 1;
             // 
             // MatrixAMInput
@@ -631,7 +633,7 @@
             this.MatrixAMInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.MatrixAMInput.Location = new System.Drawing.Point(197, 3);
             this.MatrixAMInput.Name = "MatrixAMInput";
-            this.MatrixAMInput.Size = new System.Drawing.Size(126, 43);
+            this.MatrixAMInput.Size = new System.Drawing.Size(126, 37);
             this.MatrixAMInput.TabIndex = 3;
             this.MatrixAMInput.Text = "";
             this.MatrixAMInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnlyIntNumbers);
@@ -643,7 +645,7 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(26, 49);
+            this.label1.Size = new System.Drawing.Size(26, 43);
             this.label1.TabIndex = 0;
             this.label1.Text = "N";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -655,7 +657,7 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.Location = new System.Drawing.Point(165, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(26, 49);
+            this.label2.Size = new System.Drawing.Size(26, 43);
             this.label2.TabIndex = 1;
             this.label2.Text = "M";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -666,7 +668,7 @@
             this.MatrixANInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.MatrixANInput.Location = new System.Drawing.Point(35, 3);
             this.MatrixANInput.Name = "MatrixANInput";
-            this.MatrixANInput.Size = new System.Drawing.Size(124, 43);
+            this.MatrixANInput.Size = new System.Drawing.Size(124, 37);
             this.MatrixANInput.TabIndex = 2;
             this.MatrixANInput.Text = "";
             this.MatrixANInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnlyIntNumbers);
@@ -675,9 +677,9 @@
             // 
             this.GenerateA.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GenerateA.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.GenerateA.Location = new System.Drawing.Point(3, 333);
+            this.GenerateA.Location = new System.Drawing.Point(3, 355);
             this.GenerateA.Name = "GenerateA";
-            this.GenerateA.Size = new System.Drawing.Size(326, 49);
+            this.GenerateA.Size = new System.Drawing.Size(326, 43);
             this.GenerateA.TabIndex = 2;
             this.GenerateA.Text = "Сгенерировать";
             this.GenerateA.UseVisualStyleBackColor = true;
@@ -691,12 +693,12 @@
             this.tableLayoutPanel7.Controls.Add(this.tableLayoutPanel8, 0, 0);
             this.tableLayoutPanel7.Controls.Add(this.ClearA, 0, 0);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 388);
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 404);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 1;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(326, 49);
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 43F));
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(326, 43);
             this.tableLayoutPanel7.TabIndex = 6;
             // 
             // tableLayoutPanel8
@@ -711,7 +713,7 @@
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
             this.tableLayoutPanel8.RowCount = 1;
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(157, 43);
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(157, 37);
             this.tableLayoutPanel8.TabIndex = 3;
             // 
             // MultiplyA
@@ -720,7 +722,7 @@
             this.MultiplyA.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.MultiplyA.Location = new System.Drawing.Point(3, 3);
             this.MultiplyA.Name = "MultiplyA";
-            this.MultiplyA.Size = new System.Drawing.Size(88, 37);
+            this.MultiplyA.Size = new System.Drawing.Size(88, 31);
             this.MultiplyA.TabIndex = 0;
             this.MultiplyA.Text = "Умножить";
             this.MultiplyA.UseVisualStyleBackColor = true;
@@ -732,7 +734,7 @@
             this.MatrixAMultiplierInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.MatrixAMultiplierInput.Location = new System.Drawing.Point(97, 3);
             this.MatrixAMultiplierInput.Name = "MatrixAMultiplierInput";
-            this.MatrixAMultiplierInput.Size = new System.Drawing.Size(57, 37);
+            this.MatrixAMultiplierInput.Size = new System.Drawing.Size(57, 31);
             this.MatrixAMultiplierInput.TabIndex = 1;
             this.MatrixAMultiplierInput.Text = "";
             this.MatrixAMultiplierInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OnlyNumbers);
@@ -743,7 +745,7 @@
             this.ClearA.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ClearA.Location = new System.Drawing.Point(3, 3);
             this.ClearA.Name = "ClearA";
-            this.ClearA.Size = new System.Drawing.Size(157, 43);
+            this.ClearA.Size = new System.Drawing.Size(157, 37);
             this.ClearA.TabIndex = 0;
             this.ClearA.Text = "Очистить";
             this.ClearA.UseVisualStyleBackColor = true;
@@ -770,7 +772,7 @@
             this.ErrorA.ForeColor = System.Drawing.Color.Red;
             this.ErrorA.Location = new System.Drawing.Point(3, 27);
             this.ErrorA.Name = "ErrorA";
-            this.ErrorA.Size = new System.Drawing.Size(326, 27);
+            this.ErrorA.Size = new System.Drawing.Size(326, 55);
             this.ErrorA.TabIndex = 8;
             this.ErrorA.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -778,15 +780,21 @@
             // 
             this.tableLayoutPanel10.ColumnCount = 1;
             this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel10.Controls.Add(this.Swap, 0, 1);
-            this.tableLayoutPanel10.Controls.Add(this.Sum, 0, 3);
-            this.tableLayoutPanel10.Controls.Add(this.Substraction, 0, 5);
-            this.tableLayoutPanel10.Controls.Add(this.Multiplication, 0, 7);
+            this.tableLayoutPanel10.Controls.Add(this.Swap, 0, 5);
+            this.tableLayoutPanel10.Controls.Add(this.Sum, 0, 7);
+            this.tableLayoutPanel10.Controls.Add(this.Substraction, 0, 9);
+            this.tableLayoutPanel10.Controls.Add(this.Multiplication, 0, 11);
+            this.tableLayoutPanel10.Controls.Add(this.FromRightToLeft, 0, 1);
+            this.tableLayoutPanel10.Controls.Add(this.FromLeftToRight, 0, 3);
             this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel10.Location = new System.Drawing.Point(361, 3);
             this.tableLayoutPanel10.Name = "tableLayoutPanel10";
-            this.tableLayoutPanel10.RowCount = 9;
+            this.tableLayoutPanel10.RowCount = 13;
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
@@ -802,7 +810,7 @@
             // 
             this.Swap.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Swap.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Swap.Location = new System.Drawing.Point(3, 145);
+            this.Swap.Location = new System.Drawing.Point(3, 215);
             this.Swap.Name = "Swap";
             this.Swap.Size = new System.Drawing.Size(108, 54);
             this.Swap.TabIndex = 0;
@@ -814,7 +822,7 @@
             // 
             this.Sum.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Sum.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Sum.Location = new System.Drawing.Point(3, 215);
+            this.Sum.Location = new System.Drawing.Point(3, 285);
             this.Sum.Name = "Sum";
             this.Sum.Size = new System.Drawing.Size(108, 54);
             this.Sum.TabIndex = 1;
@@ -826,19 +834,19 @@
             // 
             this.Substraction.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Substraction.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Substraction.Location = new System.Drawing.Point(3, 285);
+            this.Substraction.Location = new System.Drawing.Point(3, 355);
             this.Substraction.Name = "Substraction";
             this.Substraction.Size = new System.Drawing.Size(108, 54);
             this.Substraction.TabIndex = 2;
             this.Substraction.Text = "A - B";
             this.Substraction.UseVisualStyleBackColor = true;
-            this.Substraction.Click += new System.EventHandler(this.Substraction_Click);
+            this.Substraction.Click += new System.EventHandler(this.Subtraction_Click);
             // 
             // Multiplication
             // 
             this.Multiplication.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Multiplication.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Multiplication.Location = new System.Drawing.Point(3, 355);
+            this.Multiplication.Location = new System.Drawing.Point(3, 425);
             this.Multiplication.Name = "Multiplication";
             this.Multiplication.Size = new System.Drawing.Size(108, 54);
             this.Multiplication.TabIndex = 3;
@@ -997,6 +1005,30 @@
             this.Reference.UseVisualStyleBackColor = true;
             this.Reference.Click += new System.EventHandler(this.Reference_Click);
             // 
+            // FromRightToLeft
+            // 
+            this.FromRightToLeft.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FromRightToLeft.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.FromRightToLeft.Location = new System.Drawing.Point(3, 75);
+            this.FromRightToLeft.Name = "FromRightToLeft";
+            this.FromRightToLeft.Size = new System.Drawing.Size(108, 54);
+            this.FromRightToLeft.TabIndex = 4;
+            this.FromRightToLeft.Text = "←";
+            this.FromRightToLeft.UseVisualStyleBackColor = true;
+            this.FromRightToLeft.Click += new System.EventHandler(this.FromRightToLeft_Click);
+            // 
+            // FromLeftToRight
+            // 
+            this.FromLeftToRight.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FromLeftToRight.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.FromLeftToRight.Location = new System.Drawing.Point(3, 145);
+            this.FromLeftToRight.Name = "FromLeftToRight";
+            this.FromLeftToRight.Size = new System.Drawing.Size(108, 54);
+            this.FromLeftToRight.TabIndex = 5;
+            this.FromLeftToRight.Text = "→";
+            this.FromLeftToRight.UseVisualStyleBackColor = true;
+            this.FromLeftToRight.Click += new System.EventHandler(this.FromLeftToRight_Click);
+            // 
             // MatricesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1104,6 +1136,8 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel11;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button Reference;
+        private System.Windows.Forms.Button FromRightToLeft;
+        private System.Windows.Forms.Button FromLeftToRight;
     }
 }
 

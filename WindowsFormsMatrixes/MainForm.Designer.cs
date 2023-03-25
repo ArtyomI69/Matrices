@@ -77,6 +77,7 @@
             this.MainMenuStrip = this.MenuStrip;
             this.Name = "MainForm";
             this.Text = "Главная Форма";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.MenuStrip.ResumeLayout(false);
             this.MenuStrip.PerformLayout();
