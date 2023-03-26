@@ -10,7 +10,7 @@ namespace ClassLibraryMatrices {
         /// <summary>
         /// Двоичный массив, представляющий матрицу
         /// </summary>
-        public double[,] _data;
+        private double[,] _data;
 
         /// <summary>
         /// Кол-во рядов матрицы

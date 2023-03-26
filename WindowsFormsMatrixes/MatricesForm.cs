@@ -9,6 +9,8 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClassLibraryMatrices;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace WindowsFormsMatrixes {
     public partial class MatricesForm : Form {
@@ -65,6 +67,8 @@ namespace WindowsFormsMatrixes {
             try {
                 int N = Math.Abs(int.Parse(MatrixANInput.Text));
                 int M = Math.Abs(int.Parse(MatrixAMInput.Text));
+                if (N > 100) N = 100;
+                if (M > 100) M = 100;
                 MatrixANInput.Text = N.ToString();
                 MatrixAMInput.Text = M.ToString();
                 Matrix newMatrix = new Matrix(N, M, new Random());
@@ -151,6 +155,8 @@ namespace WindowsFormsMatrixes {
             try {
                 int N = Math.Abs(int.Parse(MatrixBNInput.Text));
                 int M = Math.Abs(int.Parse(MatrixBMInput.Text));
+                if (N > 100) N = 100;
+                if (M > 100) M = 100;
                 MatrixBNInput.Text = N.ToString();
                 MatrixBMInput.Text = M.ToString();
                 Matrix newMatrix = new Matrix(N, M, new Random());
