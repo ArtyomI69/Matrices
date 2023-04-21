@@ -431,6 +431,8 @@ namespace ClassLibraryMatrices {
         /// <returns>определитель</returns>
         /// <exception cref="Exception">если матрица не квадратная</exception>
         public double Determinant() {
+            if (!IsSquare()) throw new Exception("Матрица должна быть квадратной");
+
             double determinant = 1;
             Matrix copyMatrix = (Matrix)Clone();
 

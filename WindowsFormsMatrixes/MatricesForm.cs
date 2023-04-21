@@ -454,11 +454,8 @@ namespace WindowsFormsMatrixes {
                 ClearErrorB();
                 Matrix c;
                 if (A != null && B != null) {
-                    Stopwatch stopwatch = new Stopwatch();
-                    stopwatch.Start();
-                    c = A * B;
-                    stopwatch.Stop();
-                    MessageBox.Show($"Операция умножения матриц A и B: {stopwatch.ElapsedMilliseconds}ms");
+                    HistogramForm histogram = new HistogramForm(A, B);
+                    histogram.Show();
                     return;
                 }
                 Matrix a = ConvertStringToMatrix(MatrixAInput.Text);
