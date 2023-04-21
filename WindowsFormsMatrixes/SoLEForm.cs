@@ -25,7 +25,7 @@ namespace WindowsFormsMatrixes {
                 }
                 SoLEOutput.Text = s;
             } catch {
-                SoLERepresentation.Text = "Введите систему линейных алгебраических уравнений в правильной форме (см. Справку).";
+                SoLERepresentation.Text = "Введите систему линейных алгебраических уравнений в правильной форме";
             }
         }
 
@@ -115,18 +115,8 @@ namespace WindowsFormsMatrixes {
                 }
                 SoLEOutput.Text = s;
             } catch {
-                SoLERepresentation.Text = "Введите систему линейных алгебраических уравнений в правильной форме (см. Справку).";
+                SoLERepresentation.Text = "Введите систему линейных алгебраических уравнений в правильной форме";
             }
-        }
-
-        private void Reference_Click(object sender, EventArgs e) {
-            string s = "Калькулятор предназначен для решения системы линейных уравнений.\n";
-            s += "Формат ввода системы линейных алгебраических уравнений (СЛАУ).\n";
-            s += "1 2 3 10\n";
-            s += "3 0 5 7\n";
-            s += "0 4 6 12\n";
-            s += "Через пробел. Последнее число в строке это свободный коэффициент";
-            MessageBox.Show(s);
         }
 
         private void OnlyNumbers(object sender, KeyPressEventArgs e) {

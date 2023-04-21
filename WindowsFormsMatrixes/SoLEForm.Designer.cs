@@ -39,7 +39,6 @@
             this.SoLEOutput = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
-            this.Reference = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -244,17 +243,17 @@
             this.SoLEOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.SoLEOutput.Location = new System.Drawing.Point(107, 3);
             this.SoLEOutput.Name = "SoLEOutput";
+            this.SoLEOutput.ReadOnly = true;
             this.SoLEOutput.Size = new System.Drawing.Size(936, 228);
             this.SoLEOutput.TabIndex = 1;
             this.SoLEOutput.Text = "";
             // 
             // tableLayoutPanel8
             // 
-            this.tableLayoutPanel8.ColumnCount = 2;
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85F));
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel8.ColumnCount = 1;
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel8.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel8.Controls.Add(this.Reference, 1, 0);
             this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel8.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
@@ -270,22 +269,10 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(993, 54);
+            this.label1.Size = new System.Drawing.Size(1170, 54);
             this.label1.TabIndex = 0;
             this.label1.Text = "Система линейных алгебраических уравнений";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Reference
-            // 
-            this.Reference.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Reference.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Reference.Location = new System.Drawing.Point(1002, 3);
-            this.Reference.Name = "Reference";
-            this.Reference.Size = new System.Drawing.Size(171, 48);
-            this.Reference.TabIndex = 1;
-            this.Reference.Text = "Справка";
-            this.Reference.UseVisualStyleBackColor = true;
-            this.Reference.Click += new System.EventHandler(this.Reference_Click);
             // 
             // SoLEForm
             // 
@@ -331,6 +318,5 @@
         private System.Windows.Forms.RichTextBox SoLEOutput;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button Reference;
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ClassLibraryMatrices {
-    public class Matrix : ICloneable {
+    public class Matrix : ICloneable, IEquatable<Matrix> {
         #region Поля
         /// <summary>
         /// Двоичный массив, представляющий матрицу
@@ -149,7 +149,7 @@ namespace ClassLibraryMatrices {
         /// <param name="b">число b</param>
         /// <returns>новая матрица</returns>
         public static Matrix operator ^(Matrix matrix, int power) {
-            return MatrixExponentiation(matrix, power);
+            return FastMatrixExponentiation(matrix, power);
         }
         #endregion
 
@@ -195,12 +195,14 @@ namespace ClassLibraryMatrices {
             double[] rowFactor = new double[rows1];
             double[] colFactor = new double[cols2];
 
+            // Высчитываем rowFactor
             for (int i = 0; i < rows1; i++) {
                 for (int j = 0; j < cols1 / 2; j++) {
                     rowFactor[i] += matrix1[i, j * 2] * matrix1[i, j * 2 + 1];
                 }
             }
 
+            // Высчитываем colFactor
             for (int i = 0; i < cols2; i++) {
                 for (int j = 0; j < rows2 / 2; j++) {
                     colFactor[i] += matrix2[j * 2, i] * matrix2[j * 2 + 1, i];
@@ -209,6 +211,7 @@ namespace ClassLibraryMatrices {
 
             double[,] result = new double[rows1, cols2];
 
+            // Высчитываем результат
             for (int i = 0; i < rows1; i++) {
                 for (int j = 0; j < cols2; j++) {
                     result[i, j] = -rowFactor[i] - colFactor[j];
@@ -219,6 +222,7 @@ namespace ClassLibraryMatrices {
                 }
             }
 
+            // Продолжаем вычисиление если матрица не чётна
             if (cols1 % 2 == 1) {
                 for (int i = 0; i < rows1; i++) {
                     for (int j = 0; j < cols2; j++) {
@@ -228,6 +232,89 @@ namespace ClassLibraryMatrices {
             }
 
             return new Matrix(result);
+        }
+
+        /// <summary>
+        /// Умножения матрицы методом Штрассена
+        /// </summary>
+        /// <param name="a">матрица a</param>
+        /// <param name="b">матрица b</param>
+        /// <returns>результат умножения матриц a и b</returns>
+        /// <exception cref="Exception">Если матрицы не квадратны или не равны по размерам или размер не является степенью 2</exception>
+        public static Matrix Strassen(Matrix a, Matrix b) {
+            int n = a.N;
+
+            if (!IsSameSize(a, b) || n > 0 && (n & (n - 1)) != 0)
+                throw new Exception("Матрицы должны быть квадратны, равны по размерам и размер является степенью 2");
+
+            Matrix result = new Matrix(n, n);
+
+            // Базовый случай - матрицы 1x1
+            if (n == 1) {
+                result[0, 0] = a[0, 0] * b[0, 0];
+                return result;
+            }
+
+            // Разбиваем матрицы на подматрицы
+            Matrix a11 = new Matrix(n / 2, n / 2);
+            Matrix a12 = new Matrix(n / 2, n / 2);
+            Matrix a21 = new Matrix(n / 2, n / 2);
+            Matrix a22 = new Matrix(n / 2, n / 2);
+
+            Matrix b11 = new Matrix(n / 2, n / 2);
+            Matrix b12 = new Matrix(n / 2, n / 2);
+            Matrix b21 = new Matrix(n / 2, n / 2);
+            Matrix b22 = new Matrix(n / 2, n / 2);
+
+            SplitMatrix(a, a11, a12, a21, a22);
+            SplitMatrix(b, b11, b12, b21, b22);
+
+            // Вычисляем 7 промежуточных матриц
+            Matrix p1 = Strassen(a11, b12 - b22);
+            Matrix p2 = Strassen(a11 + a12, b22);
+            Matrix p3 = Strassen(a21 + a22, b11);
+            Matrix p4 = Strassen(a22, b21 - b11);
+            Matrix p5 = Strassen(a11 + a22, b11 + b22);
+            Matrix p6 = Strassen(a12 - a22, b21 + b22);
+            Matrix p7 = Strassen(a11 - a21, b11 + b12);
+
+            // Собираем результат из 4 подматриц
+            Matrix c11 = p5 + p4 - p2 + p6;
+            Matrix c12 = p1 + p2;
+            Matrix c21 = p3 + p4;
+            Matrix c22 = p5 + p1 - p3 - p7;
+
+            JoinMatrices(c11, c12, c21, c22, result);
+
+            return result;
+        }
+
+        // Функция разбивает матрицу на 4 подматрицы
+        public static void SplitMatrix(Matrix matrix, Matrix a11, Matrix a12, Matrix a21, Matrix a22) {
+            int n = matrix.N;
+
+            for (int i = 0; i < n / 2; i++) {
+                for (int j = 0; j < n / 2; j++) {
+                    a11[i, j] = matrix[i, j];
+                    a12[i, j] = matrix[i, j + n / 2];
+                    a21[i, j] = matrix[i + n / 2, j];
+                    a22[i, j] = matrix[i + n / 2, j + n / 2];
+                }
+            }
+        }
+
+        // Функция объединяет 4 подматрицы в одну матрицу
+        public static void JoinMatrices(Matrix a11, Matrix a12, Matrix a21, Matrix a22, Matrix result) {
+            int n = a11.N;
+
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < n; j++) {
+                    result[i, j] = a11[i, j];
+                    result[i, j + n] = a12[i, j];
+                    result[i + n, j] = a21[i, j];
+                    result[i + n, j + n] = a22[i, j];
+                }
+            }
         }
         #endregion
 
@@ -294,7 +381,7 @@ namespace ClassLibraryMatrices {
         /// <returns>Обратная матрица</returns>
         /// <exception cref="Exception">Есши матрица не квадратная</exception>
         public Matrix Inverse() {
-            if (!IsSquare()) throw new Exception("Матрица должна быть квадратной для возведения в степень");
+            if (!IsSquare()) throw new Exception("Матрица должна быть квадратной для нахождение обратной");
 
             double[,] augmentedMatrix = new double[N, 2 * N];
 
@@ -308,7 +395,7 @@ namespace ClassLibraryMatrices {
 
             // Выполняем операции со строками, чтобы получить единичную матрицу слева.
             for (int i = 0; i < N; i++) {
-                // Divide the current row by the pivot element
+                // Разделить текущую строку на опорный элемент
                 double pivot = augmentedMatrix[i, i];
                 for (int j = i; j < 2 * N; j++) {
                     augmentedMatrix[i, j] /= pivot;
@@ -344,9 +431,10 @@ namespace ClassLibraryMatrices {
         /// <returns>определитель</returns>
         /// <exception cref="Exception">если матрица не квадратная</exception>
         public double Determinant() {
-            double sign = 1;
+            double determinant = 1;
             Matrix copyMatrix = (Matrix)Clone();
 
+            // Преобразование матрицы к верхнеугольной форме
             for (int i = 0; i < N; i++) {
                 int maxRow = i;
 
@@ -362,7 +450,7 @@ namespace ClassLibraryMatrices {
                         copyMatrix[i, j] = copyMatrix[maxRow, j];
                         copyMatrix[maxRow, j] = temp;
                     }
-                    sign *= -1;
+                    determinant *= -1;
                 }
 
                 for (int j = i + 1; j < N; j++) {
@@ -376,8 +464,7 @@ namespace ClassLibraryMatrices {
                 }
             }
 
-            double determinant = sign;
-
+            // Умножение элементов главной диагонали
             for (int i = 0; i < N; i++) {
                 determinant *= copyMatrix[i, i];
             }
@@ -417,6 +504,19 @@ namespace ClassLibraryMatrices {
         /// <returns>True - матрицы одинаковы по размерам, false - иначе</returns>
         public static bool IsSameSize(Matrix a, Matrix b) {
             return a.N == b.N && a.M == b.M;
+        }
+
+        /// <summary>
+        /// Сравнивает матрицу с другой
+        /// </summary>
+        /// <param name="matrix2">матрица для сравнения</param>
+        /// <returns>True - если матрицы равны, false - иначе</returns>
+        public bool Equals(Matrix matrix2) {
+            bool equal =
+         _data.Rank == matrix2._data.Rank &&
+        Enumerable.Range(0, _data.Rank).All(dimension => _data.GetLength(dimension) == matrix2._data.GetLength(dimension)) &&
+        _data.Cast<double>().SequenceEqual(matrix2._data.Cast<double>());
+            return equal;
         }
 
         /// <summary>

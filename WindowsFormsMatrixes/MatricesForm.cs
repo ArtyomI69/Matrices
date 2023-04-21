@@ -11,12 +11,68 @@ using System.Windows.Forms;
 using ClassLibraryMatrices;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace WindowsFormsMatrixes {
     public partial class MatricesForm : Form {
+        private Matrix A;
+        private Matrix B;
+
         public MatricesForm() {
             InitializeComponent();
         }
+
+        #region Инициализация матричных полей A и B
+        private void SetMatrixA(Matrix newMatrix) {
+            if (newMatrix == null) {
+                A = null;
+                MatrixAInput.Clear();
+                MatrixAInput.ReadOnly = false;
+                if (B == null) {
+                    FromRightToLeft.Enabled = true;
+                    FromLeftToRight.Enabled = true;
+                    Swap.Enabled = true;
+                    InsertResultInA.Enabled = true;
+                    InsertResultInB.Enabled = true;
+                }
+                return;
+            }
+
+            A = newMatrix;
+            MatrixAInput.Text = $"Матрица размером {newMatrix.N}x{newMatrix.M} сохранена в памяти";
+            MatrixAInput.ReadOnly = true;
+            FromRightToLeft.Enabled = false;
+            FromLeftToRight.Enabled = false;
+            Swap.Enabled = false;
+            InsertResultInA.Enabled = false;
+            InsertResultInB.Enabled = false;
+        }
+
+        private void SetMatrixB(Matrix newMatrix) {
+            if (newMatrix == null) {
+                B = null;
+                MatrixBInput.Clear();
+                MatrixBInput.ReadOnly = false;
+                if (A == null) {
+                    FromRightToLeft.Enabled = true;
+                    FromLeftToRight.Enabled = true;
+                    Swap.Enabled = true;
+                    InsertResultInA.Enabled = true;
+                    InsertResultInB.Enabled = true;
+                }
+                return;
+            }
+
+            B = newMatrix;
+            MatrixBInput.Text = $"Матрица размером {newMatrix.N}x{newMatrix.M} сохранена в памяти";
+            MatrixBInput.ReadOnly = true;
+            FromRightToLeft.Enabled = false;
+            FromLeftToRight.Enabled = false;
+            Swap.Enabled = false;
+            InsertResultInA.Enabled = false;
+            InsertResultInB.Enabled = false;
+        }
+        #endregion
 
         #region Конвертация текста в матрицу
         private static Matrix ConvertStringToMatrix(string s) {
@@ -26,7 +82,8 @@ namespace WindowsFormsMatrixes {
             double[,] adjMatrix = new double[N, M];
             int i = 0, j = 0;
             foreach (string line in input.Split('\n')) {
-                foreach (string el in line.Trim().Split(' ')) {
+                string lineRemovedExtraSpaces = Regex.Replace(line, @"\s+", " ");
+                foreach (string el in lineRemovedExtraSpaces.Trim().Split(' ')) {
                     adjMatrix[i, j] = double.Parse(el);
                     j++;
                 }
@@ -54,25 +111,18 @@ namespace WindowsFormsMatrixes {
             ErrorA.Text = "";
         }
 
-        private void PrintErrorB(string message) {
-            ErrorB.Text = message;
-        }
-
-        private void ClearErrorB() {
-            ErrorB.Text = "";
-        }
-
         private void GenerateA_Click(object sender, EventArgs e) {
             ClearErrorA();
             try {
                 int N = Math.Abs(int.Parse(MatrixANInput.Text));
                 int M = Math.Abs(int.Parse(MatrixAMInput.Text));
-                if (N > 100) N = 100;
-                if (M > 100) M = 100;
                 MatrixANInput.Text = N.ToString();
                 MatrixAMInput.Text = M.ToString();
                 Matrix newMatrix = new Matrix(N, M, new Random());
-                MatrixAInput.Text = newMatrix.ToString();
+                if (N > 50 || M > 50) {
+                    SetMatrixA(newMatrix);
+                } else
+                    MatrixAInput.Text = newMatrix.ToString();
             } catch (FormatException err) {
                 PrintErrorA("N и M целые должны быть целыми числами");
             } catch (Exception err) {
@@ -82,12 +132,21 @@ namespace WindowsFormsMatrixes {
 
         private void ClearA_Click(object sender, EventArgs e) {
             ClearErrorA();
-            MatrixAInput.Clear();
+            if (A != null) SetMatrixA(null);
+            else MatrixAInput.Clear();
         }
 
         private void TransponseA_Click(object sender, EventArgs e) {
             ClearErrorA();
             try {
+                if (A != null) {
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatch.Start();
+                    SetMatrixA(A.Transpose());
+                    stopwatch.Stop();
+                    MessageBox.Show($"Время транспонирования матрицы A: {stopwatch.ElapsedMilliseconds}ms");
+                    return;
+                }
                 Matrix transponsedMatrix = ConvertStringToMatrix(MatrixAInput.Text).Transpose();
                 MatrixAInput.Text = transponsedMatrix.ToString();
             } catch (FormatException err) {
@@ -100,6 +159,14 @@ namespace WindowsFormsMatrixes {
         private void DeterminantA_Click(object sender, EventArgs e) {
             ClearErrorA();
             try {
+                if (A != null) {
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatch.Start();
+                    A.Determinant();
+                    stopwatch.Stop();
+                    MessageBox.Show($"Время нахождение определителя матрицы A: {stopwatch.ElapsedMilliseconds}ms");
+                    return;
+                }
                 double determinant = ConvertStringToMatrix(MatrixAInput.Text).Determinant();
                 MessageBox.Show($"Определитель матрицы: {determinant:0.00}", "Определитель");
             } catch (FormatException err) {
@@ -113,6 +180,14 @@ namespace WindowsFormsMatrixes {
             ClearErrorA();
             try {
                 double multiplier = double.Parse(MatrixAMultiplierInput.Text);
+                if (A != null) {
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatch.Start();
+                    SetMatrixA(A * multiplier);
+                    stopwatch.Stop();
+                    MessageBox.Show($"Время умножения матрицы A: {stopwatch.ElapsedMilliseconds}ms");
+                    return;
+                }
                 Matrix newMatrix = ConvertStringToMatrix(MatrixAInput.Text) * multiplier;
                 MatrixAInput.Text = newMatrix.ToString();
             } catch (FormatException err) {
@@ -126,6 +201,14 @@ namespace WindowsFormsMatrixes {
             ClearErrorA();
             try {
                 int argument = int.Parse(MatrixAArumentInput.Text);
+                if (A != null) {
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatch.Start();
+                    SetMatrixA(A ^ argument);
+                    stopwatch.Stop();
+                    MessageBox.Show($"Время возведения в степень матрицы A: {stopwatch.ElapsedMilliseconds}ms");
+                    return;
+                }
                 Matrix newMatrix = ConvertStringToMatrix(MatrixAInput.Text) ^ argument;
                 MatrixAArumentInput.Text = argument.ToString();
                 MatrixAInput.Text = newMatrix.ToString();
@@ -139,6 +222,14 @@ namespace WindowsFormsMatrixes {
         private void ReverseA_Click(object sender, EventArgs e) {
             ClearErrorA();
             try {
+                if (A != null) {
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatch.Start();
+                    SetMatrixA(A.Inverse());
+                    stopwatch.Stop();
+                    MessageBox.Show($"Время нахождение обратной матрицы матрицы A: {stopwatch.ElapsedMilliseconds}ms");
+                    return;
+                }
                 Matrix inversedMatrix = ConvertStringToMatrix(MatrixAInput.Text).Inverse();
                 MatrixAInput.Text = inversedMatrix.ToString();
             } catch (FormatException err) {
@@ -150,17 +241,26 @@ namespace WindowsFormsMatrixes {
         #endregion
 
         #region МатрицаB
+        private void PrintErrorB(string message) {
+            ErrorB.Text = message;
+        }
+
+        private void ClearErrorB() {
+            ErrorB.Text = "";
+        }
+
         private void GenerateB_Click(object sender, EventArgs e) {
             ClearErrorB();
             try {
                 int N = Math.Abs(int.Parse(MatrixBNInput.Text));
                 int M = Math.Abs(int.Parse(MatrixBMInput.Text));
-                if (N > 100) N = 100;
-                if (M > 100) M = 100;
                 MatrixBNInput.Text = N.ToString();
                 MatrixBMInput.Text = M.ToString();
                 Matrix newMatrix = new Matrix(N, M, new Random());
-                MatrixBInput.Text = newMatrix.ToString();
+                if (N > 50 || M > 50) {
+                    SetMatrixB(newMatrix);
+                } else
+                    MatrixBInput.Text = newMatrix.ToString();
             } catch (FormatException err) {
                 PrintErrorB("N и M целые должны быть целыми числами");
             } catch (Exception err) {
@@ -170,12 +270,21 @@ namespace WindowsFormsMatrixes {
 
         private void ClearB_Click(object sender, EventArgs e) {
             ClearErrorB();
-            MatrixBInput.Clear();
+            if (B != null) SetMatrixB(null);
+            else MatrixBInput.Clear();
         }
 
         private void TransponseB_Click(object sender, EventArgs e) {
             ClearErrorB();
             try {
+                if (B != null) {
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatch.Start();
+                    SetMatrixB(B.Transpose());
+                    stopwatch.Stop();
+                    MessageBox.Show($"Время транспонирования матрицы B: {stopwatch.ElapsedMilliseconds}ms");
+                    return;
+                }
                 Matrix transponsedMatrix = ConvertStringToMatrix(MatrixBInput.Text).Transpose();
                 MatrixBInput.Text = transponsedMatrix.ToString();
             } catch (FormatException err) {
@@ -188,6 +297,14 @@ namespace WindowsFormsMatrixes {
         private void DeterminantB_Click(object sender, EventArgs e) {
             ClearErrorB();
             try {
+                if (B != null) {
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatch.Start();
+                    B.Determinant();
+                    stopwatch.Stop();
+                    MessageBox.Show($"Время нахождение определителя матрицы B: {stopwatch.ElapsedMilliseconds}ms");
+                    return;
+                }
                 double determinant = ConvertStringToMatrix(MatrixBInput.Text).Determinant();
                 MessageBox.Show($"Определитель матрицы: {determinant:0.00}", "Определитель");
             } catch (FormatException err) {
@@ -201,6 +318,14 @@ namespace WindowsFormsMatrixes {
             ClearErrorB();
             try {
                 double multiplier = double.Parse(MatrixBMultiplierInput.Text);
+                if (B != null) {
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatch.Start();
+                    SetMatrixB(B * multiplier);
+                    stopwatch.Stop();
+                    MessageBox.Show($"Время умножения матрицы B: {stopwatch.ElapsedMilliseconds}ms");
+                    return;
+                }
                 Matrix newMatrix = ConvertStringToMatrix(MatrixBInput.Text) * multiplier;
                 MatrixBInput.Text = newMatrix.ToString();
             } catch (FormatException err) {
@@ -214,6 +339,14 @@ namespace WindowsFormsMatrixes {
             ClearErrorB();
             try {
                 int argument = int.Parse(MatrixBArumentInput.Text);
+                if (B != null) {
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatch.Start();
+                    SetMatrixB(B ^ argument);
+                    stopwatch.Stop();
+                    MessageBox.Show($"Время возведения в степень матрицы B: {stopwatch.ElapsedMilliseconds}ms");
+                    return;
+                }
                 Matrix newMatrix = ConvertStringToMatrix(MatrixBInput.Text) ^ argument;
                 MatrixBArumentInput.Text = argument.ToString();
                 MatrixBInput.Text = newMatrix.ToString();
@@ -227,6 +360,14 @@ namespace WindowsFormsMatrixes {
         private void ReverseB_Click(object sender, EventArgs e) {
             ClearErrorB();
             try {
+                if (B != null) {
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatch.Start();
+                    SetMatrixB(B.Inverse());
+                    stopwatch.Stop();
+                    MessageBox.Show($"Время нахождение обратной матрицы матрицы B: {stopwatch.ElapsedMilliseconds}ms");
+                    return;
+                }
                 Matrix inversedMatrix = ConvertStringToMatrix(MatrixBInput.Text).Inverse();
                 MatrixBInput.Text = inversedMatrix.ToString();
             } catch (FormatException err) {
@@ -256,12 +397,21 @@ namespace WindowsFormsMatrixes {
         }
 
         private void Sum_Click(object sender, EventArgs e) {
-            ClearErrorA();
-            ClearErrorB();
             try {
+                ClearErrorA();
+                ClearErrorB();
+                Matrix c;
+                if (A != null && B != null) {
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatch.Start();
+                    c = A + B;
+                    stopwatch.Stop();
+                    MessageBox.Show($"Операция сложения матриц A и B: {stopwatch.ElapsedMilliseconds}ms");
+                    return;
+                }
                 Matrix a = ConvertStringToMatrix(MatrixAInput.Text);
                 Matrix b = ConvertStringToMatrix(MatrixBInput.Text);
-                Matrix c = a + b;
+                c = a + b;
                 MatrixOutput.Text = c.ToString();
             } catch (FormatException err) {
                 PrintErrorA("Введите матрицы в правильном формате");
@@ -273,13 +423,21 @@ namespace WindowsFormsMatrixes {
         }
 
         private void Subtraction_Click(object sender, EventArgs e) {
-            ClearErrorA();
-            ClearErrorB();
             try {
-
+                ClearErrorA();
+                ClearErrorB();
+                Matrix c;
+                if (A != null && B != null) {
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatch.Start();
+                    c = A - B;
+                    stopwatch.Stop();
+                    MessageBox.Show($"Операция вычитания матриц A и B: {stopwatch.ElapsedMilliseconds}ms");
+                    return;
+                }
                 Matrix a = ConvertStringToMatrix(MatrixAInput.Text);
                 Matrix b = ConvertStringToMatrix(MatrixBInput.Text);
-                Matrix c = a - b;
+                c = a - b;
                 MatrixOutput.Text = c.ToString();
             } catch (FormatException err) {
                 PrintErrorA("Введите матрицы в правильном формате");
@@ -291,12 +449,21 @@ namespace WindowsFormsMatrixes {
         }
 
         private void Multiplication_Click(object sender, EventArgs e) {
-            ClearErrorA();
-            ClearErrorB();
             try {
+                ClearErrorA();
+                ClearErrorB();
+                Matrix c;
+                if (A != null && B != null) {
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatch.Start();
+                    c = A * B;
+                    stopwatch.Stop();
+                    MessageBox.Show($"Операция умножения матриц A и B: {stopwatch.ElapsedMilliseconds}ms");
+                    return;
+                }
                 Matrix a = ConvertStringToMatrix(MatrixAInput.Text);
                 Matrix b = ConvertStringToMatrix(MatrixBInput.Text);
-                Matrix c = a * b;
+                c = a * b;
                 MatrixOutput.Text = c.ToString();
             } catch (FormatException err) {
                 PrintErrorA("Введите матрицы в правильном формате");
@@ -318,19 +485,6 @@ namespace WindowsFormsMatrixes {
             MatrixBInput.Text = MatrixOutput.Text;
             MatrixOutput.Clear();
         }
-
-        private void Reference_Click(object sender, EventArgs e) {
-            string s = "C помощью этого калькулятора вы сможете:\n" +
-                "получить определитель матрицы, возводить её в степень,\n" +
-                "найти сумму и произведение матриц, вычислить обратную матрицу.\n" +
-                "Заполните поля для элементов матрицы и нажмите соответствующую кнопку.";
-            s += "Формат ввода матрицы вручную.\n";
-            s += "1 2 3 10\n";
-            s += "3 0 5 7\n";
-            s += "0 4 6 12\n";
-            s += "Через пробел.";
-            MessageBox.Show(s);
-        }
         #endregion
 
         #region Проверка введённого текста
@@ -341,7 +495,7 @@ namespace WindowsFormsMatrixes {
         }
 
         private void OnlyIntNumbers(object sender, KeyPressEventArgs e) {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != ' ') && (e.KeyChar != '-')) {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '-')) {
                 e.Handled = true;
             }
         }

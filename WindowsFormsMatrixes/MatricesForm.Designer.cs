@@ -76,6 +76,8 @@
             this.Sum = new System.Windows.Forms.Button();
             this.Substraction = new System.Windows.Forms.Button();
             this.Multiplication = new System.Windows.Forms.Button();
+            this.FromRightToLeft = new System.Windows.Forms.Button();
+            this.FromLeftToRight = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
@@ -87,9 +89,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
-            this.Reference = new System.Windows.Forms.Button();
-            this.FromRightToLeft = new System.Windows.Forms.Button();
-            this.FromLeftToRight = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.TableLayout33.SuspendLayout();
@@ -288,7 +287,7 @@
             // MatrixBInput
             // 
             this.MatrixBInput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MatrixBInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.MatrixBInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.MatrixBInput.Location = new System.Drawing.Point(3, 85);
             this.MatrixBInput.Name = "MatrixBInput";
             this.MatrixBInput.Size = new System.Drawing.Size(326, 215);
@@ -600,7 +599,7 @@
             // MatrixAInput
             // 
             this.MatrixAInput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MatrixAInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.MatrixAInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.MatrixAInput.Location = new System.Drawing.Point(3, 85);
             this.MatrixAInput.Name = "MatrixAInput";
             this.MatrixAInput.Size = new System.Drawing.Size(326, 215);
@@ -854,6 +853,30 @@
             this.Multiplication.UseVisualStyleBackColor = true;
             this.Multiplication.Click += new System.EventHandler(this.Multiplication_Click);
             // 
+            // FromRightToLeft
+            // 
+            this.FromRightToLeft.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FromRightToLeft.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.FromRightToLeft.Location = new System.Drawing.Point(3, 75);
+            this.FromRightToLeft.Name = "FromRightToLeft";
+            this.FromRightToLeft.Size = new System.Drawing.Size(108, 54);
+            this.FromRightToLeft.TabIndex = 4;
+            this.FromRightToLeft.Text = "←";
+            this.FromRightToLeft.UseVisualStyleBackColor = true;
+            this.FromRightToLeft.Click += new System.EventHandler(this.FromRightToLeft_Click);
+            // 
+            // FromLeftToRight
+            // 
+            this.FromLeftToRight.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FromLeftToRight.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.FromLeftToRight.Location = new System.Drawing.Point(3, 145);
+            this.FromLeftToRight.Name = "FromLeftToRight";
+            this.FromLeftToRight.Size = new System.Drawing.Size(108, 54);
+            this.FromLeftToRight.TabIndex = 5;
+            this.FromLeftToRight.Text = "→";
+            this.FromLeftToRight.UseVisualStyleBackColor = true;
+            this.FromLeftToRight.Click += new System.EventHandler(this.FromLeftToRight_Click);
+            // 
             // panel1
             // 
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -904,7 +927,7 @@
             // MatrixOutput
             // 
             this.MatrixOutput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MatrixOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.MatrixOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.MatrixOutput.Location = new System.Drawing.Point(3, 57);
             this.MatrixOutput.Name = "MatrixOutput";
             this.MatrixOutput.Size = new System.Drawing.Size(278, 381);
@@ -967,17 +990,15 @@
             // 
             // tableLayoutPanel11
             // 
-            this.tableLayoutPanel11.ColumnCount = 2;
-            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85F));
-            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel11.ColumnCount = 1;
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel11.Controls.Add(this.label3, 0, 0);
-            this.tableLayoutPanel11.Controls.Add(this.Reference, 1, 0);
             this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel11.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel11.Name = "tableLayoutPanel11";
             this.tableLayoutPanel11.RowCount = 1;
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56F));
             this.tableLayoutPanel11.Size = new System.Drawing.Size(1176, 56);
             this.tableLayoutPanel11.TabIndex = 6;
             // 
@@ -988,46 +1009,10 @@
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.Location = new System.Drawing.Point(3, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(993, 56);
+            this.label3.Size = new System.Drawing.Size(1170, 56);
             this.label3.TabIndex = 0;
             this.label3.Text = "Матричный калькулятор";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Reference
-            // 
-            this.Reference.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Reference.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Reference.Location = new System.Drawing.Point(1002, 3);
-            this.Reference.Name = "Reference";
-            this.Reference.Size = new System.Drawing.Size(171, 50);
-            this.Reference.TabIndex = 1;
-            this.Reference.Text = "Справка";
-            this.Reference.UseVisualStyleBackColor = true;
-            this.Reference.Click += new System.EventHandler(this.Reference_Click);
-            // 
-            // FromRightToLeft
-            // 
-            this.FromRightToLeft.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FromRightToLeft.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.FromRightToLeft.Location = new System.Drawing.Point(3, 75);
-            this.FromRightToLeft.Name = "FromRightToLeft";
-            this.FromRightToLeft.Size = new System.Drawing.Size(108, 54);
-            this.FromRightToLeft.TabIndex = 4;
-            this.FromRightToLeft.Text = "←";
-            this.FromRightToLeft.UseVisualStyleBackColor = true;
-            this.FromRightToLeft.Click += new System.EventHandler(this.FromRightToLeft_Click);
-            // 
-            // FromLeftToRight
-            // 
-            this.FromLeftToRight.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FromLeftToRight.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.FromLeftToRight.Location = new System.Drawing.Point(3, 145);
-            this.FromLeftToRight.Name = "FromLeftToRight";
-            this.FromLeftToRight.Size = new System.Drawing.Size(108, 54);
-            this.FromLeftToRight.TabIndex = 5;
-            this.FromLeftToRight.Text = "→";
-            this.FromLeftToRight.UseVisualStyleBackColor = true;
-            this.FromLeftToRight.Click += new System.EventHandler(this.FromLeftToRight_Click);
             // 
             // MatricesForm
             // 
@@ -1135,7 +1120,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel11;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button Reference;
         private System.Windows.Forms.Button FromRightToLeft;
         private System.Windows.Forms.Button FromLeftToRight;
     }
